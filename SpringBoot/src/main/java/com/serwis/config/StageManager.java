@@ -28,17 +28,21 @@ public class StageManager {
 	}
 
 	private void show(final Parent rootnode, String title) {
-		Scene scene = prepareScene(rootnode);
-		primaryStage.setTitle(title);
-		primaryStage.setScene(scene);
-		primaryStage.sizeToScene();
-		primaryStage.centerOnScreen();
+		setOptionsScene(rootnode, title);
 
 		try {
 			primaryStage.show();
 		} catch (Exception exception) {
 			logAndExit("Nie można wyświetlić sceny: " + title, exception);
 		}
+	}
+
+	private void setOptionsScene(Parent rootnode, String title) {
+		Scene scene = prepareScene(rootnode);
+		primaryStage.setTitle(title);
+		primaryStage.setScene(scene);
+		primaryStage.sizeToScene();
+		primaryStage.centerOnScreen();
 	}
 
 	private Scene prepareScene(Parent rootnode) {
@@ -51,7 +55,6 @@ public class StageManager {
 		return scene;
 	}
 
-
 	private Parent loadViewNodeHierarchy(String fxmlFilePath) {
 		Parent rootNode = null;
 		try {
@@ -63,10 +66,24 @@ public class StageManager {
 		return rootNode;
 	}
 
-
 	private void logAndExit(String errorMsg, Exception exception) {
 		//LOG.error(errorMsg, exception, exception.getCause());
 		Platform.exit();
+	}
+
+	public void switchSceneAndWait(final FxmlView view) {
+		Parent viewRootNodeHierarchy = loadViewNodeHierarchy(view.getFxmlFile());
+		showAndWait(viewRootNodeHierarchy, view.getTitle());
+	}
+
+	private void showAndWait(Parent rootnode, String title) {
+		setOptionsScene(rootnode, title);
+
+		try {
+			primaryStage.showAndWait();
+		} catch (Exception exception) {
+			logAndExit("Nie można wyświetlić sceny: " + title, exception);
+		}
 	}
 
 }

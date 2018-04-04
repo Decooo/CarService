@@ -7,9 +7,9 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.LoginController">
    <children>
-      <TextField fx:id="textfieldUsername" layoutX="240.0" layoutY="58.0" />
-      <TextField fx:id="textfieldPassword" layoutX="240.0" layoutY="163.0" />
-      <Button layoutX="265.0" layoutY="267.0" mnemonicParsing="false" onAction="#loginAction" text="Zaloguj" />
+      <TextField fx:id="textfieldUsername" layoutX="240.0" layoutY="58.0" text="admin" />
+      <TextField fx:id="textfieldPassword" layoutX="240.0" layoutY="163.0" text="admin" />
+      <Button fx:id="btnLogin" layoutX="265.0" layoutY="267.0" mnemonicParsing="false" onAction="#loginAction" text="Zaloguj" />
       <Label layoutX="148.0" layoutY="63.0" text="Nazwa:" />
       <Label layoutX="148.0" layoutY="168.0" text="Hasło:" />
    </children>

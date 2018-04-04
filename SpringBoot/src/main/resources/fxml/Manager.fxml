@@ -8,5 +8,6 @@
       <Button layoutX="112.0" layoutY="718.0" mnemonicParsing="false" onAction="#logoutAction" text="Wyloguj" />
       <Button layoutX="117.0" layoutY="82.0" mnemonicParsing="false" onAction="#servicemanAction" text="Serwisant" />
       <Button layoutX="111.0" layoutY="160.0" mnemonicParsing="false" onAction="#warehousemanAction" text="Magazynier" />
+      <Button layoutX="95.0" layoutY="231.0" mnemonicParsing="false" onAction="#newAccountAction" text="Załóż nowe konto" />
    </children>
 </AnchorPane>

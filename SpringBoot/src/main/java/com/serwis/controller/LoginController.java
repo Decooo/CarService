@@ -5,12 +5,13 @@ import com.serwis.config.StageManager;
 import com.serwis.entity.Users;
 import com.serwis.repository.UsersRepository;
 import com.serwis.view.FxmlView;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -33,17 +34,30 @@ public class LoginController implements Initializable {
 	private StageManager stageManager;
 	@FXML
 	private TextField textfieldUsername;
-
 	@FXML
 	private TextField textfieldPassword;
+	@FXML
+	private Button btnLogin;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		setKeyPressedEnterToLogin();
+	}
 
+	private void setKeyPressedEnterToLogin() {
+		btnLogin.setOnKeyPressed(event -> {
+			try {
+				if (event.getCode() == KeyCode.ENTER) {
+					loginAction();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 	}
 
 	@FXML
-	public void loginAction(ActionEvent event) throws Exception {
+	public void loginAction() throws Exception {
 		if (usersRepository.findByUsername(textfieldUsername.getText()) == null) {
 			incorrectName();
 		} else if (!usersRepository.findByUsername(textfieldUsername.getText()).getPassword().equals(textfieldPassword.getText())) {

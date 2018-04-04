@@ -41,4 +41,8 @@ public class ManagerController implements Initializable {
 	public void warehousemanAction(ActionEvent event) {
 		stageManager.switchScene(FxmlView.WAREHOUSEMAN);
 	}
+
+	public void newAccountAction(ActionEvent event) {
+		stageManager.switchSceneAndWait(FxmlView.LOGIN);
+	}
 }
