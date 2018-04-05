@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -42,7 +43,7 @@ public class ManagerController implements Initializable {
 		stageManager.switchScene(FxmlView.WAREHOUSEMAN);
 	}
 
-	public void newAccountAction(ActionEvent event) {
-		stageManager.switchSceneAndWait(FxmlView.LOGIN);
+	public void newAccountAction(ActionEvent event) throws IOException {
+		stageManager.switchSceneAndWait(FxmlView.REGISTRATION);
 	}
 }

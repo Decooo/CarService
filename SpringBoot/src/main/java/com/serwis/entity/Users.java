@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Users {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	private int idusers;
 	private String username;
 	private String password;

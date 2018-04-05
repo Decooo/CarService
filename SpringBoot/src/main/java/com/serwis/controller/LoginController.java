@@ -68,7 +68,6 @@ public class LoginController implements Initializable {
 			UserOnline.setRole(user.getRole());
 			switchScene(user.getRole());
 		}
-
 	}
 
 	private void switchScene(String role) throws Exception {

@@ -4,8 +4,11 @@ import com.serwis.view.FxmlView;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -71,16 +74,21 @@ public class StageManager {
 		Platform.exit();
 	}
 
-	public void switchSceneAndWait(final FxmlView view) {
-		Parent viewRootNodeHierarchy = loadViewNodeHierarchy(view.getFxmlFile());
-		showAndWait(viewRootNodeHierarchy, view.getTitle());
+	public void switchSceneAndWait(final FxmlView view) throws IOException {
+		showSceneAndWait(view.getFxmlFile(), view.getTitle());
 	}
 
-	private void showAndWait(Parent rootnode, String title) {
-		setOptionsScene(rootnode, title);
-
+	private void showSceneAndWait(String pathFXML, String title) throws IOException {
+		Stage stage = new Stage();
+		Pane pane = (Pane) springFXMLLoader.load(pathFXML);
+		Scene scene = new Scene(pane);
+		stage.setScene(scene);
+		stage.setTitle(title);
+		stage.sizeToScene();
+		stage.centerOnScreen();
+		stage.initModality(Modality.APPLICATION_MODAL);
 		try {
-			primaryStage.showAndWait();
+			stage.showAndWait();
 		} catch (Exception exception) {
 			logAndExit("Nie można wyświetlić sceny: " + title, exception);
 		}

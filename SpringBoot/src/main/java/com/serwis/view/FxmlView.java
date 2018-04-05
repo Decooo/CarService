@@ -45,6 +45,16 @@ public enum FxmlView {
 		public String getFxmlFile(){
 			return "/fxml/Login.fxml";
 		}
+	},
+	REGISTRATION{
+		@Override
+		public String getTitle(){
+			return getStringFromResourceBundle("registration.title");
+		}
+		@Override
+		public String getFxmlFile(){
+			return "/fxml/Registration.fxml";
+		}
 	};
 
 
