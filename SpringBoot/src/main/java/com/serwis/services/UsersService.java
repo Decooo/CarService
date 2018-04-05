@@ -5,6 +5,8 @@ import com.serwis.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by jakub on 05.04.2018.
  */
@@ -16,6 +18,10 @@ public class UsersService {
 
 	public void addUser(Users user) {
 		usersRepository.save(user);
+	}
+
+	public List<Users> findAll(){
+		return usersRepository.findAll();
 	}
 
 }
