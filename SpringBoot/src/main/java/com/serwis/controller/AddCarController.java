@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -24,6 +25,8 @@ public class AddCarController implements Initializable {
 
 	@Autowired
 	CarsService carsService;
+	@Autowired
+	CarsController carsController;
 
 	@FXML
 	private TextField textFieldBrand;
@@ -62,7 +65,7 @@ public class AddCarController implements Initializable {
 	}
 
 	@FXML
-	public void addCarAction(ActionEvent event) {
+	public void addCarAction(ActionEvent event) throws IOException {
 		if (textFieldBrand.getText().length() == 0) {
 			notIntroducedBrand();
 		} else if (textFieldModel.getText().length() == 0) {
@@ -115,7 +118,7 @@ public class AddCarController implements Initializable {
 		alert.showAndWait();
 	}
 
-	private void alertAddedNewCar() {
+	private void alertAddedNewCar() throws IOException {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Dodano nowy samochód");
 		alert.setHeaderText("Pomyślnie dodano nowy samochód");
@@ -124,6 +127,7 @@ public class AddCarController implements Initializable {
 		if (result.get() == ButtonType.OK) {
 			Stage stage = (Stage) backButton.getScene().getWindow();
 			stage.close();
+			carsController.loadCarsDetails();
 		}
 	}
 }
