@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.CarsController">
+   <children>
+      <Button layoutX="67.0" layoutY="733.0" mnemonicParsing="false" onAction="#newCarAction" text="Dodaj samochód" />
+      <Button fx:id="backButton" layoutX="854.0" layoutY="733.0" mnemonicParsing="false" onAction="#backAction" text="Powrót" />
+   </children>
+</AnchorPane>
