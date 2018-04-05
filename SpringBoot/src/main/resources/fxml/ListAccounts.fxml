@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.ListAccountsController">
+   <children>
+      <TableView id="tableAccounts" prefHeight="400.0" prefWidth="543.0">
+        <columns>
+
+          <TableColumn id="usernameColumn" prefWidth="166.0" text="Login" />
+          <TableColumn id="passwordColumn" prefWidth="166.0" text="Hasło" />
+            <TableColumn id="roleColumn" prefWidth="162.0" text="Rola użytkownika" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
