@@ -10,7 +10,16 @@
       <TextField fx:id="textfieldUsername" layoutX="240.0" layoutY="58.0" text="admin" />
       <TextField fx:id="textfieldPassword" layoutX="240.0" layoutY="163.0" text="admin" />
       <Button fx:id="btnLogin" layoutX="265.0" layoutY="267.0" mnemonicParsing="false" onAction="#loginAction" text="Zaloguj" />
-      <Label layoutX="148.0" layoutY="63.0" text="Nazwa:" />
-      <Label layoutX="148.0" layoutY="168.0" text="Hasło:" />
+      <Label layoutX="173.0" layoutY="63.0" text="Nazwa:" />
+      <Label layoutX="176.0" layoutY="168.0" text="Hasło:" />
+      <Label layoutX="35.0" layoutY="63.0" text="Serwisant:" />
+      <Label layoutX="26.0" layoutY="89.0" text="Login: serwis" />
+      <Label layoutX="26.0" layoutY="110.0" text="Hasło: serwis" />
+      <Label layoutX="29.0" layoutY="168.0" text="Magazynier:" />
+      <Label layoutX="18.0" layoutY="190.0" text="Login: magazyn" />
+      <Label layoutX="18.0" layoutY="211.0" text="Hasło: magazyn" />
+      <Label layoutX="22.0" layoutY="267.0" text="Administrator:" />
+      <Label layoutX="28.0" layoutY="288.0" text="Login: admin" />
+      <Label layoutX="28.0" layoutY="309.0" text="Hasło: admin" />
    </children>
 </AnchorPane>
