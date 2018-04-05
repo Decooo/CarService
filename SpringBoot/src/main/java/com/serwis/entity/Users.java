@@ -1,6 +1,9 @@
 package com.serwis.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Created by jakub on 15.03.2018.
@@ -57,4 +60,5 @@ public class Users {
 				", role='" + role + '\'' +
 				'}';
 	}
+
 }

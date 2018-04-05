@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
@@ -59,9 +60,9 @@ public class LoginController implements Initializable {
 	@FXML
 	public void loginAction() throws Exception {
 		if (usersRepository.findByUsername(textfieldUsername.getText()) == null) {
-			incorrectName();
-		} else if (!usersRepository.findByUsername(textfieldUsername.getText()).getPassword().equals(textfieldPassword.getText())) {
-			incorrectPassword();
+			incorrectNameAlert();
+		} else if (passwordIsCorrect()) {
+			incorrectPasswordAlert();
 		} else {
 			Users user = usersRepository.findByUsername(textfieldUsername.getText());
 			UserOnline.setUsername(user.getUsername());
@@ -69,6 +70,11 @@ public class LoginController implements Initializable {
 			switchScene(user.getRole());
 		}
 	}
+
+	private boolean passwordIsCorrect() {
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		return !bCryptPasswordEncoder.matches(textfieldPassword.getText(),usersRepository.findByUsername(textfieldUsername.getText()).getPassword());
+		}
 
 	private void switchScene(String role) throws Exception {
 		if (role.equalsIgnoreCase("administrator")) {
@@ -82,7 +88,7 @@ public class LoginController implements Initializable {
 		}
 	}
 
-	private void incorrectPassword() {
+	private void incorrectPasswordAlert() {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Logowanie nieprawidłowe");
 		alert.setHeaderText("Podane hasło jest nieprawidłowe");
@@ -93,7 +99,7 @@ public class LoginController implements Initializable {
 		}
 	}
 
-	private void incorrectName() {
+	private void incorrectNameAlert() {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Logowanie nieprawidłowe");
 		alert.setHeaderText("Nie znaleziono takiego użytkownika");

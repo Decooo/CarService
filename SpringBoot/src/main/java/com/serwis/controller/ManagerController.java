@@ -46,4 +46,8 @@ public class ManagerController implements Initializable {
 	public void newAccountAction(ActionEvent event) throws IOException {
 		stageManager.switchSceneAndWait(FxmlView.REGISTRATION);
 	}
+
+	public void listAccountsAction(ActionEvent event) throws IOException {
+		stageManager.switchSceneAndWait(FxmlView.LISTACCOUNTS);
+	}
 }
