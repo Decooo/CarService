@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,5 +14,12 @@
             <TableColumn fx:id="passwordColumn" prefWidth="148.0" text="Hasło" />
             <TableColumn fx:id="roleColumn" prefWidth="181.0" text="Rola użytkownika" />
         </columns>
+      <contextMenu>
+         <ContextMenu>
+           <items>
+             <MenuItem mnemonicParsing="false" onAction="#deleteUsers" text="Usuń" />
+           </items>
+         </ContextMenu>
+      </contextMenu>
     </TableView>
 </AnchorPane>

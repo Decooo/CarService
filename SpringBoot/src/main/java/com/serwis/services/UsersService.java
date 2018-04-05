@@ -24,4 +24,7 @@ public class UsersService {
 		return usersRepository.findAll();
 	}
 
+	public void deleteInBatch(List<Users> users){
+		usersRepository.deleteInBatch(users);
+	}
 }
