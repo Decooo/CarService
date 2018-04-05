@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -40,5 +41,10 @@ public class ServicemanController implements Initializable {
 		}else{
 			stageManager.switchScene(FxmlView.MANAGER);
 		}
+	}
+
+	@FXML
+	public void openCarsListAction(ActionEvent event) throws IOException {
+		stageManager.switchSceneAndWait(FxmlView.CARS);
 	}
 }

@@ -15,8 +15,7 @@
       </TableView>
       <Button layoutX="98.0" layoutY="64.0" mnemonicParsing="false" text="Nowe zlecenie" />
       <Button layoutX="98.0" layoutY="132.0" mnemonicParsing="false" text="Historia zleceń" />
-      <Button layoutX="83.0" layoutY="204.0" mnemonicParsing="false" text="Wyszukaj samochód" />
-      <Button layoutX="92.0" layoutY="277.0" mnemonicParsing="false" text="Dodaj samochód" />
       <Button fx:id="logoutButton" layoutX="119.0" layoutY="727.0" mnemonicParsing="false" onAction="#logoutAction" text="Wyloguj" />
+      <Button layoutX="108.0" layoutY="199.0" mnemonicParsing="false" onAction="#openCarsListAction" text="Samochody" />
    </children>
 </AnchorPane>
