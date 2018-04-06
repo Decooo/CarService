@@ -1,4 +1,4 @@
-package com.serwis.controller;
+package com.serwis.controller.cars;
 
 import com.serwis.Util.Alerts.ValidationCarAlert;
 import com.serwis.entity.Cars;

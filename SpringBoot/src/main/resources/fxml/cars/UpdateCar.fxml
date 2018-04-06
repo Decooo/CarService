@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.AddCarController">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.cars.UpdateCarController">
    <children>
       <Button fx:id="backButton" layoutX="482.0" layoutY="526.0" mnemonicParsing="false" onAction="#backAction" text="Powrót" />
       <Label layoutX="154.0" layoutY="113.0" text="Marka:" />
@@ -18,7 +18,7 @@
       <TextField fx:id="textFieldModel" layoutX="262.0" layoutY="166.0" />
       <TextField fx:id="textFieldVIN" layoutX="262.0" layoutY="275.0" />
       <TextField fx:id="textFieldRegistrationNumber" layoutX="262.0" layoutY="327.0" />
-      <Button layoutX="234.0" layoutY="400.0" mnemonicParsing="false" onAction="#addCarAction" text="Dodaj samochód" />
+      <Button layoutX="234.0" layoutY="400.0" mnemonicParsing="false" onAction="#updateCarAction" text="Aktualizuj dane" />
       <ComboBox fx:id="yearsProductionComboBox" layoutX="281.0" layoutY="218.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
