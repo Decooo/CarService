@@ -1,4 +1,4 @@
-package com.serwis.controller;
+package com.serwis.controller.accounts;
 
 import com.serwis.authentication.UserOnline;
 import com.serwis.config.StageManager;

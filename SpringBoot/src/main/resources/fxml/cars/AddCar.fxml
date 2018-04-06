@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.AddCarController">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.cars.AddCarController">
    <children>
       <Button fx:id="backButton" layoutX="482.0" layoutY="526.0" mnemonicParsing="false" onAction="#backAction" text="Powrót" />
       <Label layoutX="154.0" layoutY="113.0" text="Marka:" />

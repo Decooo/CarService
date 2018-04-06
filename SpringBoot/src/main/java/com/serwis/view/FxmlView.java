@@ -6,92 +6,119 @@ import java.util.ResourceBundle;
  * Created by jakub on 08.03.2018.
  */
 public enum FxmlView {
-	SERVICEMAN{
+	SERVICEMAN {
 		@Override
-		public String getTitle(){
+		public String getTitle() {
 			return getStringFromResourceBundle("serviceman.title");
 		}
+
 		@Override
-		public String getFxmlFile(){
+		public String getFxmlFile() {
 			return "/fxml/Serviceman.fxml";
 		}
 	},
-	WAREHOUSEMAN{
+	WAREHOUSEMAN {
 		@Override
-		public String getTitle(){
+		public String getTitle() {
 			return getStringFromResourceBundle("warehouseman.title");
 		}
+
 		@Override
-		public String getFxmlFile(){
+		public String getFxmlFile() {
 			return "/fxml/Warehouseman.fxml";
 		}
 	},
-	MANAGER{
+	MANAGER {
 		@Override
-		public String getTitle(){
+		public String getTitle() {
 			return getStringFromResourceBundle("manager.title");
 		}
+
 		@Override
-		public String getFxmlFile(){
+		public String getFxmlFile() {
 			return "/fxml/Manager.fxml";
 		}
 	},
-	LOGIN{
+	LOGIN {
 		@Override
-		public String getTitle(){
+		public String getTitle() {
 			return getStringFromResourceBundle("login.title");
 		}
+
 		@Override
-		public String getFxmlFile(){
-			return "/fxml/Login.fxml";
+		public String getFxmlFile() {
+			return "/fxml/accounts/Login.fxml";
 		}
 	},
-	REGISTRATION{
+	REGISTRATION {
 		@Override
-		public String getTitle(){
+		public String getTitle() {
 			return getStringFromResourceBundle("registration.title");
 		}
+
 		@Override
-		public String getFxmlFile(){
-			return "/fxml/Registration.fxml";
+		public String getFxmlFile() {
+			return "/fxml/accounts/Registration.fxml";
 		}
 	},
-	LISTACCOUNTS{
+	LISTACCOUNTS {
 		@Override
-		public String getTitle(){
+		public String getTitle() {
 			return getStringFromResourceBundle("listAccounts.title");
 		}
+
 		@Override
-		public String getFxmlFile(){
-			return "/fxml/ListAccounts.fxml";
+		public String getFxmlFile() {
+			return "/fxml/accounts/ListAccounts.fxml";
 		}
 	},
-	CARS{
+	CARS {
 		@Override
-		public String getTitle(){
+		public String getTitle() {
 			return getStringFromResourceBundle("cars.title");
 		}
+
 		@Override
-		public String getFxmlFile(){
-			return "/fxml/Cars.fxml";
+		public String getFxmlFile() {
+			return "/fxml/cars/Cars.fxml";
 		}
 	},
-	ADDCAR{
+	ADDCAR {
 		@Override
-		public String getTitle(){
-			return getStringFromResourceBundle("addcar.title");
+		public String getTitle() {
+			return getStringFromResourceBundle("addCar.title");
 		}
+
 		@Override
-		public String getFxmlFile(){
-			return "/fxml/AddCar.fxml";
+		public String getFxmlFile() {
+			return "/fxml/cars/AddCar.fxml";
 		}
-	};
+	},
+	UPDATECAR {
+		@Override
+		public String getTitle() {return getStringFromResourceBundle("updateCar.title");}
+
+		@Override
+		public String getFxmlFile() {return "/fxml/cars/UpdateCar.fxml";}
+	},
+	CARREPAIRHISTORY {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("carRepairHistory.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/cars/CarRepairHistory.fxml";
+		}
+	},;
 
 
 	public abstract String getTitle();
+
 	public abstract String getFxmlFile();
 
-	String getStringFromResourceBundle(String key){
+	String getStringFromResourceBundle(String key) {
 		return ResourceBundle.getBundle("Bundle").getString(key);
 	}
 }

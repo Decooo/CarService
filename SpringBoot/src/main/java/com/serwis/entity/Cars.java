@@ -23,7 +23,7 @@ public class Cars {
 
 	@Override
 	public String toString() {
-		return "Cars{" +
+		return "cars{" +
 				"id_cars=" + id_cars +
 				", brand='" + brand + '\'' +
 				", model='" + model + '\'' +

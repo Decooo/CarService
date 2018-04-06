@@ -1,4 +1,4 @@
-package com.serwis.controller;
+package com.serwis.controller.accounts;
 
 import com.serwis.entity.Users;
 import com.serwis.services.UsersService;
