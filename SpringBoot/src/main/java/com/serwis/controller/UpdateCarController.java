@@ -1,5 +1,6 @@
 package com.serwis.controller;
 
+import com.serwis.Util.Alerts.ValidationCarAlert;
 import com.serwis.entity.Cars;
 import com.serwis.services.CarsService;
 import javafx.collections.FXCollections;
@@ -43,11 +44,21 @@ public class UpdateCarController implements Initializable {
 
 	private ObservableList<Integer> yearsProduction = FXCollections.observableArrayList();
 
+	private int indexYearProduction;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		Cars car = CarsController.getCar();
 		yearsProductionComboBox.setItems(doListYearsProduction());
-		yearsProductionComboBox.getSelectionModel().select(0);
+		setCarProperties(car);
+	}
+
+	private void setCarProperties(Cars car) {
+		yearsProductionComboBox.getSelectionModel().select(indexYearProduction);
+		textFieldBrand.setText(car.getBrand());
+		textFieldModel.setText(car.getModel());
+		textFieldVIN.setText(car.getVIN());
+		textFieldRegistrationNumber.setText(car.getRegistration_number());
 	}
 
 	private ObservableList<Integer> doListYearsProduction() {
@@ -55,7 +66,13 @@ public class UpdateCarController implements Initializable {
 		for (int i = 2018; i >= 1970; i--) {
 			yearsProduction.add(i);
 		}
+		setIndexYearProduction();
 		return yearsProduction;
+	}
+
+	private void setIndexYearProduction() {
+		Cars car = CarsController.getCar();
+		indexYearProduction = 2018 - car.getYear_production();
 	}
 
 	@FXML
@@ -67,61 +84,31 @@ public class UpdateCarController implements Initializable {
 	@FXML
 	public void updateCarAction(ActionEvent event) throws IOException {
 		if (textFieldBrand.getText().length() == 0) {
-			notIntroducedBrand();
+			ValidationCarAlert.notIntroducedBrand();
 		} else if (textFieldModel.getText().length() == 0) {
-			notIntroducedModel();
+			ValidationCarAlert.notIntroducedModel();
 		} else if (textFieldVIN.getText().length() != 17) {
-			badLenghtVINnumber();
+			ValidationCarAlert.badLenghtVINnumber();
 		} else if (textFieldRegistrationNumber.getText().length() == 0) {
-			notIntroducedRegistrationNumber();
+			ValidationCarAlert.notIntroducedRegistrationNumber();
 		} else {
-			Cars car = new Cars();
+			Cars car = CarsController.getCar();
 			car.setBrand(textFieldBrand.getText());
 			car.setModel(textFieldModel.getText());
 			car.setVIN(textFieldVIN.getText());
 			car.setRegistration_number(textFieldRegistrationNumber.getText());
 			car.setYear_production(yearsProduction.get(yearsProductionComboBox.getSelectionModel().getSelectedIndex()));
 			carsService.addCar(car);
-			alertAddedNewCar();
+			alertUpdatedCar();
 		}
 	}
 
-	private void badLenghtVINnumber() {
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setTitle("Błąd");
-		alert.setHeaderText("Numer VIN musi mieć 17 znaków");
-		alert.getButtonTypes().setAll(ButtonType.OK);
-		alert.showAndWait();
-	}
 
-	private void notIntroducedRegistrationNumber() {
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setTitle("Błąd");
-		alert.setHeaderText("Nie wprowadzono numeru rejestracyjnego pojazdu");
-		alert.getButtonTypes().setAll(ButtonType.OK);
-		alert.showAndWait();
-	}
 
-	private void notIntroducedModel() {
+	private void alertUpdatedCar() throws IOException {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setTitle("Błąd");
-		alert.setHeaderText("Nie wprowadzono modelu pojazdu");
-		alert.getButtonTypes().setAll(ButtonType.OK);
-		alert.showAndWait();
-	}
-
-	private void notIntroducedBrand() {
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setTitle("Błąd");
-		alert.setHeaderText("Nie wprowadzono marki pojazdu");
-		alert.getButtonTypes().setAll(ButtonType.OK);
-		alert.showAndWait();
-	}
-
-	private void alertAddedNewCar() throws IOException {
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setTitle("Dodano nowy samochód");
-		alert.setHeaderText("Pomyślnie dodano nowy samochód");
+		alert.setTitle("Zaaktualizowano dane");
+		alert.setHeaderText("Zaaktualizowano dane pojazu");
 		alert.getButtonTypes().setAll(ButtonType.OK);
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {

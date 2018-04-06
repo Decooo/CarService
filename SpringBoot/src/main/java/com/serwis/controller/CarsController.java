@@ -33,6 +33,7 @@ import java.util.ResourceBundle;
 @Controller
 public class CarsController implements Initializable {
 
+	public static Cars car;
 	@FXML
 	private Button backButton;
 	@Lazy
@@ -57,7 +58,6 @@ public class CarsController implements Initializable {
 	@FXML
 	private TableColumn<Cars, Boolean> editColumn;
 	private ObservableList<Cars> carsList = FXCollections.observableArrayList();
-
 	private Callback<TableColumn<Cars, Boolean>, TableCell<Cars, Boolean>> cellFactory =
 			new Callback<TableColumn<Cars, Boolean>, TableCell<Cars, Boolean>>() {
 				@Override
@@ -97,12 +97,21 @@ public class CarsController implements Initializable {
 						}
 
 						private void updateCars(Cars cars) throws IOException {
+							setCar(cars);
 							stageManager.switchSceneAndWait(FxmlView.UPDATECAR);
 						}
 					};
 					return cell;
 				}
 			};
+
+	public static Cars getCar() {
+		return car;
+	}
+
+	public static void setCar(Cars car) {
+		CarsController.car = car;
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

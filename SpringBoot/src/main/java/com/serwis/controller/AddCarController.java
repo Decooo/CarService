@@ -1,5 +1,6 @@
 package com.serwis.controller;
 
+import com.serwis.Util.Alerts.ValidationCarAlert;
 import com.serwis.entity.Cars;
 import com.serwis.services.CarsService;
 import javafx.collections.FXCollections;
@@ -67,13 +68,13 @@ public class AddCarController implements Initializable {
 	@FXML
 	public void addCarAction(ActionEvent event) throws IOException {
 		if (textFieldBrand.getText().length() == 0) {
-			notIntroducedBrand();
+			ValidationCarAlert.notIntroducedBrand();
 		} else if (textFieldModel.getText().length() == 0) {
-			notIntroducedModel();
+			ValidationCarAlert.notIntroducedModel();
 		} else if (textFieldVIN.getText().length() != 17) {
-			badLenghtVINnumber();
+			ValidationCarAlert.badLenghtVINnumber();
 		} else if (textFieldRegistrationNumber.getText().length() == 0) {
-			notIntroducedRegistrationNumber();
+			ValidationCarAlert.notIntroducedRegistrationNumber();
 		} else {
 			Cars car = new Cars();
 			car.setBrand(textFieldBrand.getText());
@@ -84,38 +85,6 @@ public class AddCarController implements Initializable {
 			carsService.addCar(car);
 			alertAddedNewCar();
 		}
-	}
-
-	private void badLenghtVINnumber() {
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setTitle("Błąd");
-		alert.setHeaderText("Numer VIN musi mieć 17 znaków");
-		alert.getButtonTypes().setAll(ButtonType.OK);
-		alert.showAndWait();
-	}
-
-	private void notIntroducedRegistrationNumber() {
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setTitle("Błąd");
-		alert.setHeaderText("Nie wprowadzono numeru rejestracyjnego pojazdu");
-		alert.getButtonTypes().setAll(ButtonType.OK);
-		alert.showAndWait();
-	}
-
-	private void notIntroducedModel() {
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setTitle("Błąd");
-		alert.setHeaderText("Nie wprowadzono modelu pojazdu");
-		alert.getButtonTypes().setAll(ButtonType.OK);
-		alert.showAndWait();
-	}
-
-	private void notIntroducedBrand() {
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setTitle("Błąd");
-		alert.setHeaderText("Nie wprowadzono marki pojazdu");
-		alert.getButtonTypes().setAll(ButtonType.OK);
-		alert.showAndWait();
 	}
 
 	private void alertAddedNewCar() throws IOException {
