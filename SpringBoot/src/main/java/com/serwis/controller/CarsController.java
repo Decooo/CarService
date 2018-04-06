@@ -5,6 +5,7 @@ import com.serwis.entity.Cars;
 import com.serwis.services.CarsService;
 import com.serwis.view.FxmlView;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,6 +35,8 @@ import java.util.ResourceBundle;
 public class CarsController implements Initializable {
 
 	public static Cars car;
+	@FXML
+	private TextField searchTextField;
 	@FXML
 	private Button backButton;
 	@Lazy
@@ -118,7 +121,7 @@ public class CarsController implements Initializable {
 		ordinalNumber();
 		setColumnProperties();
 		loadCarsDetails();
-
+		filtrationTable();
 	}
 
 	private void ordinalNumber() {
@@ -170,4 +173,28 @@ public class CarsController implements Initializable {
 
 		if (result.get() == ButtonType.OK) carsService.deleteInBatch(cars);
 	}
+
+	private void filtrationTable() {
+		ObservableList data = carsTable.getItems();
+		searchTextField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+			if (oldValue != null && (newValue.length() < oldValue.length())) {
+				carsTable.setItems(data);
+			}
+			String value = newValue.toLowerCase();
+			ObservableList<Cars> subentries = FXCollections.observableArrayList();
+
+			long count = carsTable.getColumns().stream().count();
+			for (int i = 0; i < carsTable.getItems().size(); i++) {
+				for (int j = 0; j < count; j++) {
+					String entry = "" + carsTable.getColumns().get(j).getCellData(i);
+					if (entry.toLowerCase().contains(value)) {
+						subentries.add(carsTable.getItems().get(i));
+						break;
+					}
+				}
+			}
+			carsTable.setItems(subentries);
+		});
+	}
+
 }
