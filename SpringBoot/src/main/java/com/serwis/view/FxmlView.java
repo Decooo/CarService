@@ -79,11 +79,21 @@ public enum FxmlView {
 	ADDCAR{
 		@Override
 		public String getTitle(){
-			return getStringFromResourceBundle("addcar.title");
+			return getStringFromResourceBundle("addCar.title");
 		}
 		@Override
 		public String getFxmlFile(){
 			return "/fxml/AddCar.fxml";
+		}
+	},
+	UPDATECAR{
+		@Override
+		public String getTitle(){
+			return getStringFromResourceBundle("updateCar.title");
+		}
+		@Override
+		public String getFxmlFile(){
+			return "/fxml/UpdateCar.fxml";
 		}
 	};
 

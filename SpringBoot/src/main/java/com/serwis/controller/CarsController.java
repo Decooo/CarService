@@ -10,9 +10,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -30,7 +34,10 @@ import java.util.ResourceBundle;
 public class CarsController implements Initializable {
 
 	@FXML
-	public Button backButton;
+	private Button backButton;
+	@Lazy
+	@Autowired
+	private StageManager stageManager;
 	@Autowired
 	private CarsService carsService;
 	@FXML
@@ -47,13 +54,55 @@ public class CarsController implements Initializable {
 	private TableColumn<Cars, String> VINColumn;
 	@FXML
 	private TableColumn<Cars, String> nrRegistrationColumn;
-
+	@FXML
+	private TableColumn<Cars, Boolean> editColumn;
 	private ObservableList<Cars> carsList = FXCollections.observableArrayList();
 
+	private Callback<TableColumn<Cars, Boolean>, TableCell<Cars, Boolean>> cellFactory =
+			new Callback<TableColumn<Cars, Boolean>, TableCell<Cars, Boolean>>() {
+				@Override
+				public TableCell<Cars, Boolean> call(final TableColumn<Cars, Boolean> param) {
+					final TableCell<Cars, Boolean> cell = new TableCell<Cars, Boolean>() {
+						final Button btnEdit = new Button();
+						Image imgEdit = new Image(getClass().getResourceAsStream("/images/edit.png"));
 
-	@Lazy
-	@Autowired
-	private StageManager stageManager;
+						@Override
+						public void updateItem(Boolean check, boolean empty) {
+							super.updateItem(check, empty);
+							if (empty) {
+								setGraphic(null);
+								setText(null);
+							} else {
+								btnEdit.setOnAction(e -> {
+									Cars cars = getTableView().getItems().get(getIndex());
+									try {
+										updateCars(cars);
+									} catch (IOException e1) {
+										e1.printStackTrace();
+									}
+								});
+
+								btnEdit.setStyle("-fx-background-color: transparent;");
+								ImageView iv = new ImageView();
+								iv.setImage(imgEdit);
+								iv.setPreserveRatio(true);
+								iv.setSmooth(true);
+								iv.setCache(true);
+								btnEdit.setGraphic(iv);
+
+								setGraphic(btnEdit);
+								setAlignment(Pos.CENTER);
+								setText(null);
+							}
+						}
+
+						private void updateCars(Cars cars) throws IOException {
+							stageManager.switchSceneAndWait(FxmlView.UPDATECAR);
+						}
+					};
+					return cell;
+				}
+			};
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -75,7 +124,7 @@ public class CarsController implements Initializable {
 		yearProductionColumn.setCellValueFactory(new PropertyValueFactory<>("year_production"));
 		VINColumn.setCellValueFactory(new PropertyValueFactory<>("VIN"));
 		nrRegistrationColumn.setCellValueFactory(new PropertyValueFactory<>("registration_number"));
-
+		editColumn.setCellFactory(cellFactory);
 	}
 
 	public void loadCarsDetails() {
@@ -112,5 +161,4 @@ public class CarsController implements Initializable {
 
 		if (result.get() == ButtonType.OK) carsService.deleteInBatch(cars);
 	}
-
 }

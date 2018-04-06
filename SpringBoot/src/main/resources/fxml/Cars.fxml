@@ -17,8 +17,9 @@
           <TableColumn fx:id="brandColumn" prefWidth="100.0" text="Marka" />
             <TableColumn fx:id="modelColumn" prefWidth="105.0" text="Model" />
             <TableColumn fx:id="yearProductionColumn" prefWidth="150.0" text="Rok produkcji" />
-            <TableColumn fx:id="VINColumn" prefWidth="222.0" text="VIN" />
-            <TableColumn fx:id="nrRegistrationColumn" prefWidth="156.0" text="Nr rejestracyjny" />
+            <TableColumn fx:id="VINColumn" prefWidth="175.0" text="VIN" />
+            <TableColumn fx:id="nrRegistrationColumn" prefWidth="119.0" text="Nr rejestracyjny" />
+            <TableColumn fx:id="editColumn" prefWidth="86.0" text="Edytuj" />
         </columns>
          <contextMenu>
             <ContextMenu onAction="#deleteCars">
