@@ -1,7 +1,9 @@
 package com.serwis.controller.accounts;
 
+import com.serwis.entity.UserRole;
 import com.serwis.entity.Users;
 import com.serwis.repository.UsersRepository;
+import com.serwis.services.UserRoleService;
 import com.serwis.services.UsersService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,9 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by jakub on 05.04.2018.
@@ -31,6 +31,8 @@ public class RegistrationController implements Initializable {
 	private UsersRepository usersRepository;
 	@Autowired
 	private UsersService usersService;
+	@Autowired
+	private UserRoleService userRoleService;
 
 	@FXML
 	private ComboBox<String> chooseRole;
@@ -40,7 +42,7 @@ public class RegistrationController implements Initializable {
 	private TextField textFieldUsername;
 
 	private ObservableList<String> listRole = FXCollections.observableArrayList();
-	private HashMap<String, String> map = new HashMap<>();
+	private HashMap<String, Integer> map = new HashMap<>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -49,19 +51,20 @@ public class RegistrationController implements Initializable {
 	}
 
 	private ObservableList<String> doListRole() {
+		List<UserRole> listUserRole = userRoleService.findAll();
 		listRole.clear();
-		listRole.add("Serwisant");
-		listRole.add("Magazynier");
-		listRole.add("Administrator");
-		doMapRole();
+		doMapRole(listUserRole);
+		for (Map.Entry<String, Integer> entry : map.entrySet()) {
+			listRole.add(entry.getKey());
+		}
 		return listRole;
 	}
 
-	private void doMapRole() {
+	private void doMapRole(List<UserRole> list) {
 		map.clear();
-		map.put("Serwisant", "SERVICEMAN");
-		map.put("Magazynier", "WAREHOUSEMAN");
-		map.put("Administrator", "ADMINISTRATOR");
+		for (UserRole aList : list) {
+			map.put(aList.getRole(),aList.getId_user_role());
+		}
 	}
 
 	@FXML
@@ -72,23 +75,13 @@ public class RegistrationController implements Initializable {
 			incorrectPassword();
 		} else {
 			Users newUser = new Users();
-//			newUser.setUsername(textFieldUsername.getText());
-//			newUser.setPassword(textFieldPassword.getText());
-//			newUser.setId_role(map.get(chooseRole.getSelectionModel().getSelectedItem()));
-//			usersService.addUser(newUser);
-//			alertAccountWasCreated();
-		}
-	}
-
-	private void alertAccountWasCreated() {
-	Alert alert = new Alert(Alert.AlertType.INFORMATION);
-	alert.setTitle("Założono nowe konto");
-	alert.setHeaderText("Pomyślnie założono nowe konto");
-	alert.getButtonTypes().setAll(ButtonType.OK);
-	Optional<ButtonType> result = alert.showAndWait();
-	if(result.get()==ButtonType.OK){
-		Stage stage = (Stage) textFieldPassword.getScene().getWindow();
-		stage.close();
+			newUser.setUsername(textFieldUsername.getText());
+			newUser.setPassword(textFieldPassword.getText());
+			//String role = map.get(chooseRole.getSelectionModel().getSelectedIndex());
+			//nie ma zwracać indeksu tylko klucz z tablicy
+			newUser.setId_role(map.get(chooseRole.getSelectionModel().getSelectedItem()));
+			usersService.addUser(newUser);
+			alertAccountWasCreated();
 		}
 	}
 
@@ -112,6 +105,18 @@ public class RegistrationController implements Initializable {
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {
 			textFieldPassword.clear();
+		}
+	}
+
+	private void alertAccountWasCreated() {
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Założono nowe konto");
+		alert.setHeaderText("Pomyślnie założono nowe konto");
+		alert.getButtonTypes().setAll(ButtonType.OK);
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) {
+			Stage stage = (Stage) textFieldPassword.getScene().getWindow();
+			stage.close();
 		}
 	}
 
