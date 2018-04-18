@@ -17,7 +17,7 @@ public class Users {
 	private int idusers;
 	private String username;
 	private String password;
-	private String role;
+	private int id_role;
 
 	public int getIdusers() {
 		return idusers;
@@ -43,12 +43,12 @@ public class Users {
 		this.password = password;
 	}
 
-	public String getRole() {
-		return role;
+	public int getId_role() {
+		return id_role;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setId_role(int id_role) {
+		this.id_role = id_role;
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class Users {
 				"idusers=" + idusers +
 				", username='" + username + '\'' +
 				", password='" + password + '\'' +
-				", role='" + role + '\'' +
+				", id_role='" + id_role + '\'' +
 				'}';
 	}
 

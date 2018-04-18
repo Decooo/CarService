@@ -7,17 +7,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public class UserOnline {
 	private static String username = null;
-	private static String role =null;
+	private static int idRole = -1;
 
-	public static String getRole() {
-		if (role != null) {
-			return role;
+	public static int getIdRole() {
+		if (idRole != -1) {
+			return idRole;
 		} else throw new UsernameNotFoundException("Nie znaleziono zalogowanego roli zalogowanego użytkownika");
 	}
 
-	public static void setRole(String role) {
+	public static void setIdRole(int idRole) {
 
-		UserOnline.role = role;
+		UserOnline.idRole = idRole;
 	}
 
 	public static void setUsername(String username) {

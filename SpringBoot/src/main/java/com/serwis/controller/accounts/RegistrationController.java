@@ -72,11 +72,11 @@ public class RegistrationController implements Initializable {
 			incorrectPassword();
 		} else {
 			Users newUser = new Users();
-			newUser.setUsername(textFieldUsername.getText());
-			newUser.setPassword(textFieldPassword.getText());
-			newUser.setRole(map.get(chooseRole.getSelectionModel().getSelectedItem()));
-			usersService.addUser(newUser);
-			alertAccountWasCreated();
+//			newUser.setUsername(textFieldUsername.getText());
+//			newUser.setPassword(textFieldPassword.getText());
+//			newUser.setId_role(map.get(chooseRole.getSelectionModel().getSelectedItem()));
+//			usersService.addUser(newUser);
+//			alertAccountWasCreated();
 		}
 	}
 

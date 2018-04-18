@@ -28,16 +28,16 @@ public class WarehousemanController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		if (UserOnline.getRole().equalsIgnoreCase("administrator")) {
+		if (UserOnline.getIdRole() == 1) {
 			logoutButton.setText("Powrót");
 		}
 	}
 
 	@FXML
 	public void logoutAction(ActionEvent event) {
-		if(!UserOnline.getRole().equalsIgnoreCase("administrator")){
+		if (UserOnline.getIdRole() != 1) {
 			stageManager.switchScene(FxmlView.LOGIN);
-		}else{
+		} else {
 			stageManager.switchScene(FxmlView.MANAGER);
 		}
 	}
