@@ -1,6 +1,6 @@
 package com.serwis.controller.cars;
 
-import com.serwis.Util.Alerts.ValidationCarAlert;
+import com.serwis.util.alerts.ValidationCarAlert;
 import com.serwis.entity.Cars;
 import com.serwis.services.CarsService;
 import javafx.collections.FXCollections;

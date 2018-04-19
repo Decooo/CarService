@@ -237,7 +237,6 @@ public class CarsController implements Initializable {
 		alertDeleteCars(cars);
 		loadCarsDetails();
 	}
-
 	private void alertDeleteCars(List<Cars> cars) {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		alert.setTitle("Potwierdzenie usuwania");

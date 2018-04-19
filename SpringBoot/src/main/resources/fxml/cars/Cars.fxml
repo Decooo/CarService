@@ -33,6 +33,6 @@
          </contextMenu>
       </TableView>
       <Label layoutX="76.0" layoutY="14.0" text="Wyszukaj:" />
-      <TextField fx:id="searchTextField" layoutX="35.0" layoutY="40.0" />
+      <TextField fx:id="searchTextField" layoutX="35.0" layoutY="40.0" prefHeight="31.0" prefWidth="167.0" promptText="wyszukaj" />
    </children>
 </AnchorPane>

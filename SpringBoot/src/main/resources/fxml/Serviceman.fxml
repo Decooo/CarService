@@ -17,5 +17,6 @@
       <Button layoutX="98.0" layoutY="132.0" mnemonicParsing="false" text="Historia zleceń" />
       <Button fx:id="logoutButton" layoutX="119.0" layoutY="727.0" mnemonicParsing="false" onAction="#logoutAction" text="Wyloguj" />
       <Button layoutX="108.0" layoutY="199.0" mnemonicParsing="false" onAction="#openCarsListAction" text="Samochody" />
+      <Button layoutX="124.0" layoutY="258.0" mnemonicParsing="false" onAction="#openCardsClientsAction" text="Klienci" />
    </children>
 </AnchorPane>

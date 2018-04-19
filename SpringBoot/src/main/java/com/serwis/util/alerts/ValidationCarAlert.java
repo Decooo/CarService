@@ -1,4 +1,4 @@
-package com.serwis.Util.Alerts;
+package com.serwis.util.alerts;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;

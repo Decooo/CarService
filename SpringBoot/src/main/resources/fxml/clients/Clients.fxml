@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.clients.ClientsController">
+   <children>
+      <TableView fx:id="clientsTable" layoutX="219.0" prefHeight="800.0" prefWidth="786.0">
+         <columns>
+            <TableColumn fx:id="idColumn" prefWidth="50.0" text="L.p" />
+            <TableColumn fx:id="nameColumn" prefWidth="160.0" text="Imie" />
+            <TableColumn fx:id="surnameColumn" prefWidth="222.0" text="Nazwisko" />
+            <TableColumn fx:id="peselColumn" prefWidth="175.0" text="Pesel" />
+            <TableColumn fx:id="editColumn" prefWidth="82.0" text="Edytuj" />
+            <TableColumn fx:id="historyColumn" prefWidth="96.0" text="Historia" />
+         </columns>
+         <contextMenu>
+            <ContextMenu onAction="#deleteCars">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Usuń" />
+               </items>
+            </ContextMenu>
+         </contextMenu>
+      </TableView>
+      <Button fx:id="backButton" layoutX="72.0" layoutY="721.0" mnemonicParsing="false" onAction="#backAction" text="Powrót" />
+      <TextField fx:id="searchTextField" layoutX="13.0" layoutY="35.0" promptText="wyszukaj" />
+      <Button layoutX="59.0" layoutY="130.0" mnemonicParsing="false" onAction="#newClientAction" text="Dodaj klienta" />
+   </children>
+</AnchorPane>
