@@ -3,6 +3,7 @@ package com.serwis.controller.clients;
 import com.serwis.config.StageManager;
 import com.serwis.entity.Clients;
 import com.serwis.services.ClientsService;
+import com.serwis.util.imageSettings.EditAndHistoryButton;
 import com.serwis.view.FxmlView;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
@@ -11,9 +12,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -30,7 +35,9 @@ import java.util.ResourceBundle;
  */
 @Controller
 public class ClientsController implements Initializable {
+	private static Clients client;
 	List<Clients> clientsList = new ArrayList<>();
+	ObservableList<Clients> observableList = FXCollections.observableArrayList(clientsList);
 	@Autowired
 	private ClientsService clientsService;
 	@Autowired
@@ -54,7 +61,97 @@ public class ClientsController implements Initializable {
 	private TableColumn<Clients, Boolean> historyColumn;
 	@FXML
 	private TableColumn<Clients, Boolean> editColumn;
-	ObservableList<Clients> observableList = FXCollections.observableArrayList(clientsList);
+	private Callback<TableColumn<Clients, Boolean>, TableCell<Clients, Boolean>> cellEditFactory =
+			new Callback<TableColumn<Clients, Boolean>, TableCell<Clients, Boolean>>() {
+				@Override
+				public TableCell<Clients, Boolean> call(final TableColumn<Clients, Boolean> param) {
+					final TableCell<Clients, Boolean> cell = new TableCell<Clients, Boolean>() {
+						final Button btnEdit = new Button();
+						Image imgEdit = new Image(getClass().getResourceAsStream("/images/edit.png"));
+
+						@Override
+						public void updateItem(Boolean check, boolean empty) {
+							super.updateItem(check, empty);
+							if (empty) {
+								setGraphic(null);
+								setText(null);
+							} else {
+								btnEdit.setOnAction(e -> {
+									Clients client = getTableView().getItems().get(getIndex());
+									try {
+										updateClient(client);
+									} catch (IOException e1) {
+										e1.printStackTrace();
+									}
+								});
+
+								btnEdit.setStyle("-fx-background-color: transparent;");
+								ImageView iv = EditAndHistoryButton.getImageView(imgEdit);
+								btnEdit.setGraphic(iv);
+
+								setGraphic(btnEdit);
+								setAlignment(Pos.CENTER);
+								setText(null);
+							}
+						}
+
+						private void updateClient(Clients client) throws IOException {
+							setClient(client);
+							stageManager.switchSceneAndWait(FxmlView.UPDATECLIENT);
+						}
+					};
+					return cell;
+				}
+			};
+	private Callback<TableColumn<Clients, Boolean>, TableCell<Clients, Boolean>> cellHistoryFactory =
+			new Callback<TableColumn<Clients, Boolean>, TableCell<Clients, Boolean>>() {
+				@Override
+				public TableCell<Clients, Boolean> call(final TableColumn<Clients, Boolean> param) {
+					final TableCell<Clients, Boolean> cell = new TableCell<Clients, Boolean>() {
+						final Button btnHistory = new Button();
+						Image imgEdit = new Image(getClass().getResourceAsStream("/images/history.png"));
+
+						@Override
+						public void updateItem(Boolean check, boolean empty) {
+							super.updateItem(check, empty);
+							if (empty) {
+								setGraphic(null);
+								setText(null);
+							} else {
+								btnHistory.setOnAction(e -> {
+									Clients client = getTableView().getItems().get(getIndex());
+									try {
+										historyClient(client);
+									} catch (IOException e1) {
+										e1.printStackTrace();
+									}
+								});
+
+								btnHistory.setStyle("-fx-background-color: transparent;");
+								ImageView iv = EditAndHistoryButton.getImageView(imgEdit);
+								btnHistory.setGraphic(iv);
+
+								setGraphic(btnHistory);
+								setAlignment(Pos.CENTER);
+								setText(null);
+							}
+						}
+
+						private void historyClient(Clients clients) throws IOException {
+							setClient(client);
+							stageManager.switchSceneAndWait(FxmlView.CLIENTHISTORY);
+						}
+					};
+					return cell;
+				}
+			};
+	public static Clients getClient() {
+		return client;
+	}
+
+	public static void setClient(Clients client) {
+		ClientsController.client = client;
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -74,8 +171,8 @@ public class ClientsController implements Initializable {
 		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 		surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
 		peselColumn.setCellValueFactory(new PropertyValueFactory<>("pesel"));
-		//editColumn.setCellFactory(cellEditFactory);
-		//historyColumn.setCellFactory(cellHistoryFactory);
+		editColumn.setCellFactory(cellEditFactory);
+		historyColumn.setCellFactory(cellHistoryFactory);
 	}
 
 	public void loadClientsDetails() {
@@ -125,7 +222,6 @@ public class ClientsController implements Initializable {
 
 		if (result.get() == ButtonType.OK) clientsService.deleteInBatch(clients);
 	}
-
 
 	public void backAction(ActionEvent event) {
 		Stage stage = (Stage) backButton.getScene().getWindow();
