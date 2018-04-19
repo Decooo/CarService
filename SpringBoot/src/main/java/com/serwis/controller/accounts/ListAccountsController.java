@@ -63,6 +63,7 @@ public class ListAccountsController implements Initializable {
 
 	private void loadUserDetails() {
 		userList.clear();
+		userRoleList.clear();
 		userList.addAll(usersService.findAll());
 		for (Users list : userList) {
 			UserRole role = userRoleService.getRole(list.getId_role());

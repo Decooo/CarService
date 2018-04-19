@@ -62,14 +62,16 @@ public class RegistrationController implements Initializable {
 	private void doMapRole(List<UserRole> list) {
 		map.clear();
 		for (UserRole aList : list) {
-			map.put(aList.getRole(),aList.getIdUserRole());
+			map.put(aList.getRole(), aList.getIdUserRole());
 		}
 	}
 
 	@FXML
 	public void addNewAccountAction(ActionEvent event) {
 		if (textFieldUsername.getText().length() < 3) {
-			incorrectUsername();
+			incorrectUsername("Nazwa użytkownika musi mieć minimum 3 znaki");
+		} else if (userExists(textFieldUsername.getText())) {
+			incorrectUsername("Taki użytkownik już istnieje");
 		} else if (textFieldPassword.getText().length() < 5) {
 			incorrectPassword();
 		} else {
@@ -82,10 +84,19 @@ public class RegistrationController implements Initializable {
 		}
 	}
 
-	private void incorrectUsername() {
+
+
+	private boolean userExists(String username) {
+		Users user = usersService.findByUsername(username);
+		if(user != null) {
+			return true;
+		}else return false;
+	}
+
+	private void incorrectUsername(String text) {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Bład zakładania konta");
-		alert.setHeaderText("Nazwa użytkownika musi mieć minimum 3 znaki");
+		alert.setHeaderText(text);
 		alert.getButtonTypes().setAll(ButtonType.OK);
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {

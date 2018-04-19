@@ -23,6 +23,10 @@ public class UsersService {
 		usersRepository.save(user);
 	}
 
+	public Users findByUsername(String username) {
+		return usersRepository.findByUsername(username);
+	}
+
 	public List<Users> findAll() {
 		return usersRepository.findAll();
 	}
