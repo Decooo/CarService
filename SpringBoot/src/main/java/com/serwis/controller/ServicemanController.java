@@ -47,4 +47,9 @@ public class ServicemanController implements Initializable {
 	public void openCarsListAction(ActionEvent event) throws IOException {
 		stageManager.switchSceneAndWait(FxmlView.CARS);
 	}
+
+	@FXML
+	public void openCardsClientsAction(ActionEvent event) throws IOException {
+		stageManager.switchSceneAndWait(FxmlView.CLIENTS);
+	}
 }

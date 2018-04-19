@@ -111,7 +111,51 @@ public enum FxmlView {
 		public String getFxmlFile() {
 			return "/fxml/cars/CarRepairHistory.fxml";
 		}
-	},;
+	},
+	CLIENTS {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("clients.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/clients/clients.fxml";
+		}
+	},
+	ADDCLIENT {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("addclient.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/clients/addClient.fxml";
+		}
+	},
+	UPDATECLIENT {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("updateclient.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/clients/updateClient.fxml";
+		}
+	},
+	CLIENTHISTORY {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("clientHistory.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/clients/clientHistory.fxml";
+		}
+	};
 
 
 	public abstract String getTitle();

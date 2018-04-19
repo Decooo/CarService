@@ -43,7 +43,7 @@ public class Clients {
 		this.surname = surname;
 	}
 
-	public Long getPesel() {
+	public long getPesel() {
 		return pesel;
 	}
 

@@ -3,6 +3,7 @@ package com.serwis.controller.cars;
 import com.serwis.config.StageManager;
 import com.serwis.entity.Cars;
 import com.serwis.services.CarsService;
+import com.serwis.util.imageSettings.EditAndHistoryButton;
 import com.serwis.view.FxmlView;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
@@ -88,7 +89,7 @@ public class CarsController implements Initializable {
 								});
 
 								btnEdit.setStyle("-fx-background-color: transparent;");
-								ImageView iv = getImageView(imgEdit);
+								ImageView iv = EditAndHistoryButton.getImageView(imgEdit);
 								btnEdit.setGraphic(iv);
 
 								setGraphic(btnEdit);
@@ -131,7 +132,7 @@ public class CarsController implements Initializable {
 								});
 
 								btnHistory.setStyle("-fx-background-color: transparent;");
-								ImageView iv = getImageView(imgEdit);
+								ImageView iv = EditAndHistoryButton.getImageView(imgEdit);
 								btnHistory.setGraphic(iv);
 
 								setGraphic(btnHistory);
@@ -155,15 +156,6 @@ public class CarsController implements Initializable {
 
 	public static void setCar(Cars car) {
 		CarsController.car = car;
-	}
-
-	private ImageView getImageView(Image imgEdit) {
-		ImageView iv = new ImageView();
-		iv.setImage(imgEdit);
-		iv.setPreserveRatio(true);
-		iv.setSmooth(true);
-		iv.setCache(true);
-		return iv;
 	}
 
 	@Override
@@ -237,7 +229,6 @@ public class CarsController implements Initializable {
 		alertDeleteCars(cars);
 		loadCarsDetails();
 	}
-
 	private void alertDeleteCars(List<Cars> cars) {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		alert.setTitle("Potwierdzenie usuwania");
