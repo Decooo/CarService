@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -53,6 +54,7 @@ public class ClientsController implements Initializable {
 	private TableColumn<Clients, Boolean> historyColumn;
 	@FXML
 	private TableColumn<Clients, Boolean> editColumn;
+	ObservableList<Clients> observableList = FXCollections.observableArrayList(clientsList);
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -107,8 +109,23 @@ public class ClientsController implements Initializable {
 		});
 	}
 
+	@FXML
 	public void deleteCars(ActionEvent event) {
+		List<Clients> clients = clientsTable.getSelectionModel().getSelectedItems();
+		alertDeleteClients(clients);
+		loadClientsDetails();
 	}
+
+	private void alertDeleteClients(List<Clients> clients) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Potwierdzenie usuwania");
+		alert.setHeaderText(null);
+		alert.setContentText("Czy napewno chcesz usunąć wybranych klientów?");
+		Optional<ButtonType> result = alert.showAndWait();
+
+		if (result.get() == ButtonType.OK) clientsService.deleteInBatch(clients);
+	}
+
 
 	public void backAction(ActionEvent event) {
 		Stage stage = (Stage) backButton.getScene().getWindow();

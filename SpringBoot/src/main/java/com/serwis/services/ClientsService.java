@@ -23,4 +23,10 @@ public class ClientsService {
 	public List<Clients> findAll() {
 		return clientsRepository.findAll();
 	}
+
+	public void deleteInBatch(List<Clients> clients) {
+		clientsRepository.deleteInBatch(clients);
+	}
+
+
 }
