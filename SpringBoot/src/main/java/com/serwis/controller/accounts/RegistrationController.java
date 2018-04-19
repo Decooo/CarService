@@ -40,7 +40,6 @@ public class RegistrationController implements Initializable {
 	private TextField textFieldPassword;
 	@FXML
 	private TextField textFieldUsername;
-
 	private ObservableList<String> listRole = FXCollections.observableArrayList();
 	private HashMap<String, Integer> map = new HashMap<>();
 
@@ -63,7 +62,7 @@ public class RegistrationController implements Initializable {
 	private void doMapRole(List<UserRole> list) {
 		map.clear();
 		for (UserRole aList : list) {
-			map.put(aList.getRole(),aList.getId_user_role());
+			map.put(aList.getRole(),aList.getIdUserRole());
 		}
 	}
 
@@ -77,8 +76,6 @@ public class RegistrationController implements Initializable {
 			Users newUser = new Users();
 			newUser.setUsername(textFieldUsername.getText());
 			newUser.setPassword(textFieldPassword.getText());
-			//String role = map.get(chooseRole.getSelectionModel().getSelectedIndex());
-			//nie ma zwracać indeksu tylko klucz z tablicy
 			newUser.setId_role(map.get(chooseRole.getSelectionModel().getSelectedItem()));
 			usersService.addUser(newUser);
 			alertAccountWasCreated();

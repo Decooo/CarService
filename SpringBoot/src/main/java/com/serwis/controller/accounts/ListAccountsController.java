@@ -1,9 +1,11 @@
 package com.serwis.controller.accounts;
 
+import com.serwis.entity.UserRole;
 import com.serwis.entity.Users;
+import com.serwis.services.UserRoleService;
 import com.serwis.services.UsersService;
+import com.serwis.wrappers.UsersWrapper;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -25,21 +28,23 @@ import java.util.ResourceBundle;
 public class ListAccountsController implements Initializable {
 
 	@Autowired
+	private UserRoleService userRoleService;
+	@Autowired
+	private
 	UsersService usersService;
+	@FXML
+	private TableView<UsersWrapper> tableAccounts;
+	@FXML
+	private TableColumn<UsersWrapper, String> idColumn;
+	@FXML
+	private TableColumn<UsersWrapper, String> usernameColumn;
+	@FXML
+	private TableColumn<UsersWrapper, String> passwordColumn;
+	@FXML
+	private TableColumn<UsersWrapper, String> roleColumn;
 
-	@FXML
-	private TableView<Users> tableAccounts;
-	@FXML
-	private TableColumn<Users, String> idColumn;
-	@FXML
-	private TableColumn<Users, String> usernameColumn;
-	@FXML
-	private TableColumn<Users, String> passwordColumn;
-	@FXML
-	private TableColumn<Users, String> roleColumn;
-
-	private ObservableList<Users> userList = FXCollections.observableArrayList();
-
+	private List<Users> userList = new ArrayList<>();
+	private List<UserRole> userRoleList = new ArrayList<>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -52,12 +57,20 @@ public class ListAccountsController implements Initializable {
 		usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
 		passwordColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
 		roleColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
+
+
 	}
 
 	private void loadUserDetails() {
 		userList.clear();
 		userList.addAll(usersService.findAll());
-		tableAccounts.setItems(userList);
+		for (Users list : userList) {
+			UserRole role = userRoleService.getRole(list.getId_role());
+			userRoleList.add(role);
+		}
+		UsersWrapper wrapper = new UsersWrapper();
+		ObservableList<UsersWrapper> usersWrapper = wrapper.UsersWrapper(userList, userRoleList);
+		tableAccounts.setItems(usersWrapper);
 		tableAccounts.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 	}
 
@@ -68,8 +81,12 @@ public class ListAccountsController implements Initializable {
 
 	@FXML
 	public void deleteUsers(ActionEvent event) {
-		List<Users> users = tableAccounts.getSelectionModel().getSelectedItems();
-		alertDeleteUsers(users);
+		List<UsersWrapper> users = tableAccounts.getSelectionModel().getSelectedItems();
+		List<Users> deleteUsers = new ArrayList<>();
+		for (UsersWrapper us : users) {
+			deleteUsers.add(usersService.findByIdUsers(us.getIdUser()));
+		}
+		alertDeleteUsers(deleteUsers);
 		loadUserDetails();
 	}
 

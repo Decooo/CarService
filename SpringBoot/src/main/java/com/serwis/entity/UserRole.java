@@ -11,23 +11,23 @@ public class UserRole {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id_user_role;
+	private int idUserRole;
 	private String role;
 
 	@Override
 	public String toString() {
 		return "UserRole{" +
-				"id_user_role=" + id_user_role +
+				"idUserRole=" + idUserRole +
 				", role='" + role + '\'' +
 				'}';
 	}
 
-	public int getId_user_role() {
-		return id_user_role;
+	public int getIdUserRole() {
+		return idUserRole;
 	}
 
-	public void setId_user_role(int id_user_role) {
-		this.id_user_role = id_user_role;
+	public void setIdUserRole(int idUserRole) {
+		this.idUserRole = idUserRole;
 	}
 
 	public String getRole() {
