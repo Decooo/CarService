@@ -1,7 +1,9 @@
 package com.serwis.controller.accounts;
 
+import com.serwis.entity.UserRole;
 import com.serwis.entity.Users;
 import com.serwis.repository.UsersRepository;
+import com.serwis.services.UserRoleService;
 import com.serwis.services.UsersService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,9 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by jakub on 05.04.2018.
@@ -31,6 +31,8 @@ public class RegistrationController implements Initializable {
 	private UsersRepository usersRepository;
 	@Autowired
 	private UsersService usersService;
+	@Autowired
+	private UserRoleService userRoleService;
 
 	@FXML
 	private ComboBox<String> chooseRole;
@@ -38,9 +40,8 @@ public class RegistrationController implements Initializable {
 	private TextField textFieldPassword;
 	@FXML
 	private TextField textFieldUsername;
-
 	private ObservableList<String> listRole = FXCollections.observableArrayList();
-	private HashMap<String, String> map = new HashMap<>();
+	private HashMap<String, Integer> map = new HashMap<>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -49,53 +50,53 @@ public class RegistrationController implements Initializable {
 	}
 
 	private ObservableList<String> doListRole() {
+		List<UserRole> listUserRole = userRoleService.findAll();
 		listRole.clear();
-		listRole.add("Serwisant");
-		listRole.add("Magazynier");
-		listRole.add("Administrator");
-		doMapRole();
+		doMapRole(listUserRole);
+		for (Map.Entry<String, Integer> entry : map.entrySet()) {
+			listRole.add(entry.getKey());
+		}
 		return listRole;
 	}
 
-	private void doMapRole() {
+	private void doMapRole(List<UserRole> list) {
 		map.clear();
-		map.put("Serwisant", "SERVICEMAN");
-		map.put("Magazynier", "WAREHOUSEMAN");
-		map.put("Administrator", "ADMINISTRATOR");
+		for (UserRole aList : list) {
+			map.put(aList.getRole(), aList.getIdUserRole());
+		}
 	}
 
 	@FXML
 	public void addNewAccountAction(ActionEvent event) {
 		if (textFieldUsername.getText().length() < 3) {
-			incorrectUsername();
+			incorrectUsername("Nazwa użytkownika musi mieć minimum 3 znaki");
+		} else if (userExists(textFieldUsername.getText())) {
+			incorrectUsername("Taki użytkownik już istnieje");
 		} else if (textFieldPassword.getText().length() < 5) {
 			incorrectPassword();
 		} else {
 			Users newUser = new Users();
 			newUser.setUsername(textFieldUsername.getText());
 			newUser.setPassword(textFieldPassword.getText());
-			newUser.setRole(map.get(chooseRole.getSelectionModel().getSelectedItem()));
+			newUser.setId_role(map.get(chooseRole.getSelectionModel().getSelectedItem()));
 			usersService.addUser(newUser);
 			alertAccountWasCreated();
 		}
 	}
 
-	private void alertAccountWasCreated() {
-	Alert alert = new Alert(Alert.AlertType.INFORMATION);
-	alert.setTitle("Założono nowe konto");
-	alert.setHeaderText("Pomyślnie założono nowe konto");
-	alert.getButtonTypes().setAll(ButtonType.OK);
-	Optional<ButtonType> result = alert.showAndWait();
-	if(result.get()==ButtonType.OK){
-		Stage stage = (Stage) textFieldPassword.getScene().getWindow();
-		stage.close();
-		}
+
+
+	private boolean userExists(String username) {
+		Users user = usersService.findByUsername(username);
+		if(user != null) {
+			return true;
+		}else return false;
 	}
 
-	private void incorrectUsername() {
+	private void incorrectUsername(String text) {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Bład zakładania konta");
-		alert.setHeaderText("Nazwa użytkownika musi mieć minimum 3 znaki");
+		alert.setHeaderText(text);
 		alert.getButtonTypes().setAll(ButtonType.OK);
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {
@@ -112,6 +113,18 @@ public class RegistrationController implements Initializable {
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {
 			textFieldPassword.clear();
+		}
+	}
+
+	private void alertAccountWasCreated() {
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Założono nowe konto");
+		alert.setHeaderText("Pomyślnie założono nowe konto");
+		alert.getButtonTypes().setAll(ButtonType.OK);
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) {
+			Stage stage = (Stage) textFieldPassword.getScene().getWindow();
+			stage.close();
 		}
 	}
 

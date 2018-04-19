@@ -23,11 +23,19 @@ public class UsersService {
 		usersRepository.save(user);
 	}
 
-	public List<Users> findAll(){
+	public Users findByUsername(String username) {
+		return usersRepository.findByUsername(username);
+	}
+
+	public List<Users> findAll() {
 		return usersRepository.findAll();
 	}
 
-	public void deleteInBatch(List<Users> users){
+	public void deleteInBatch(List<Users> users) {
 		usersRepository.deleteInBatch(users);
+	}
+
+	public Users findByIdUsers(int id) {
+		return usersRepository.findByIdusers(id);
 	}
 }

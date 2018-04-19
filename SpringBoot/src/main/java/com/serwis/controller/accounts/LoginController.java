@@ -66,8 +66,8 @@ public class LoginController implements Initializable {
 		} else {
 			Users user = usersRepository.findByUsername(textfieldUsername.getText());
 			UserOnline.setUsername(user.getUsername());
-			UserOnline.setRole(user.getRole());
-			switchScene(user.getRole());
+			UserOnline.setIdRole(user.getId_role());
+			switchScene(user.getId_role());
 		}
 	}
 
@@ -76,12 +76,12 @@ public class LoginController implements Initializable {
 		return !bCryptPasswordEncoder.matches(textfieldPassword.getText(),usersRepository.findByUsername(textfieldUsername.getText()).getPassword());
 		}
 
-	private void switchScene(String role) throws Exception {
-		if (role.equalsIgnoreCase("administrator")) {
+	private void switchScene(int role) throws Exception {
+		if (role == 1) {
 			stageManager.switchScene(FxmlView.MANAGER);
-		} else if (role.equalsIgnoreCase("warehouseman")) {
+		} else if (role == 2) {
 			stageManager.switchScene(FxmlView.WAREHOUSEMAN);
-		} else if (role.equalsIgnoreCase("serviceman")) {
+		} else if (role == 3) {
 			stageManager.switchScene(FxmlView.SERVICEMAN);
 		} else {
 			throw new Exception("Rola użytkownika jest niepoprawna");
