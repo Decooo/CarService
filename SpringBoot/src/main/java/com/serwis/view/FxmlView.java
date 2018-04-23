@@ -155,6 +155,28 @@ public enum FxmlView {
 		public String getFxmlFile() {
 			return "/fxml/clients/clientHistory.fxml";
 		}
+	},
+	SERVICECONTRACTS {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("serviceContracts.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/serviceContracts/ServiceContracts.fxml";
+		}
+	},
+	ADDSERVICECONTRACT {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("addServiceContracts.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/serviceContracts/AddServiceContract.fxml";
+		}
 	};
 
 
