@@ -8,6 +8,8 @@ import com.serwis.services.ServiceContractsService;
 import com.serwis.view.FxmlView;
 import com.serwis.wrappers.ServiceContractsWrapper;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -66,6 +68,7 @@ public class ServiceContractsController implements Initializable {
 
 	private List<Clients> clientsList = new ArrayList<>();
 	private List<ServiceContracts> contractsList = new ArrayList<>();
+	private ObservableList<ServiceContractsWrapper> serviceContractsList = FXCollections.observableArrayList();
 
 
 	@Override
@@ -77,6 +80,26 @@ public class ServiceContractsController implements Initializable {
 	}
 
 	private void filtrationTable() {
+		ObservableList data = contractsTable.getItems();
+		searchTextField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+			if (oldValue != null && (newValue.length() < oldValue.length())) {
+				contractsTable.setItems(data);
+			}
+			String value = newValue.toLowerCase();
+			ObservableList<ServiceContractsWrapper> subentries = FXCollections.observableArrayList();
+
+			long count = contractsTable.getColumns().stream().count();
+			for (int i = 0; i < contractsTable.getItems().size(); i++) {
+				for (int j = 0; j < count; j++) {
+					String entry = "" + contractsTable.getColumns().get(j).getCellData(i);
+					if (entry.toLowerCase().contains(value)) {
+						subentries.add(contractsTable.getItems().get(i));
+						break;
+					}
+				}
+			}
+			contractsTable.setItems(subentries);
+		});
 	}
 
 	private void ordinalNumber() {
@@ -108,6 +131,7 @@ public class ServiceContractsController implements Initializable {
 		ObservableList<ServiceContractsWrapper> contractsWrappers = wrapper.serviceContractsWrappers(clientsList, contractsList);
 		contractsTable.setItems(contractsWrappers);
 		contractsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		serviceContractsList = contractsWrappers;
 	}
 
 	@FXML
