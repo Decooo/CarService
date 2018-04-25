@@ -28,5 +28,7 @@ public class ClientsService {
 		clientsRepository.deleteInBatch(clients);
 	}
 
-
+	public Clients findByIdClients(int idClients) {
+		return clientsRepository.findByIdClients(idClients);
+	}
 }

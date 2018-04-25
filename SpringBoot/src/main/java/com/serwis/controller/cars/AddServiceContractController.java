@@ -88,7 +88,7 @@ public class AddServiceContractController implements Initializable {
 		if (result.get() == ButtonType.OK) {
 			Stage stage = (Stage) backButton.getScene().getWindow();
 			stage.close();
-			serviceContractsController.loadClientsDetails();
+			serviceContractsController.loadContractsDetails();
 		}
 	}
 

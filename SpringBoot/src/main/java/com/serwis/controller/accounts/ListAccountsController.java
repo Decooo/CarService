@@ -30,8 +30,7 @@ public class ListAccountsController implements Initializable {
 	@Autowired
 	private UserRoleService userRoleService;
 	@Autowired
-	private
-	UsersService usersService;
+	private	UsersService usersService;
 	@FXML
 	private TableView<UsersWrapper> tableAccounts;
 	@FXML
