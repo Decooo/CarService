@@ -5,6 +5,7 @@ import com.serwis.entity.Clients;
 import com.serwis.entity.ServiceContracts;
 import com.serwis.services.ClientsService;
 import com.serwis.services.ServiceContractsService;
+import com.serwis.util.imageSettings.EditAndHistoryButton;
 import com.serwis.view.FxmlView;
 import com.serwis.wrappers.ServiceContractsWrapper;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -14,9 +15,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -33,11 +38,15 @@ import java.util.ResourceBundle;
  */
 @Controller
 public class ServiceContractsController implements Initializable {
+	private static ServiceContracts serviceContracts;
 
-	@Autowired
-	private ClientsService clientsService;
-	@Autowired
-	private ServiceContractsService serviceContractsService;
+	public static ServiceContracts getServiceContracts() {
+		return serviceContracts;
+	}
+
+	public static void setServiceContracts(ServiceContracts serviceContracts) {
+		ServiceContractsController.serviceContracts = serviceContracts;
+	}
 
 	@FXML
 	public TableColumn<ServiceContractsWrapper, Integer> idColumn;
@@ -55,6 +64,10 @@ public class ServiceContractsController implements Initializable {
 	public TableColumn<ServiceContractsWrapper, Double> remainingAmountForPartsColumn;
 	@FXML
 	public TableColumn<ServiceContractsWrapper, Boolean> editColumn;
+	@Autowired
+	private ClientsService clientsService;
+	@Autowired
+	private ServiceContractsService serviceContractsService;
 	@FXML
 	private TextField searchTextField;
 	@FXML
@@ -68,7 +81,49 @@ public class ServiceContractsController implements Initializable {
 	private List<Clients> clientsList = new ArrayList<>();
 	private List<ServiceContracts> contractsList = new ArrayList<>();
 	private ObservableList<ServiceContractsWrapper> serviceContractsList = FXCollections.observableArrayList();
+	private Callback<TableColumn<ServiceContractsWrapper, Boolean>, TableCell<ServiceContractsWrapper, Boolean>> cellEditFactory =
+			new Callback<TableColumn<ServiceContractsWrapper, Boolean>, TableCell<ServiceContractsWrapper, Boolean>>() {
+				@Override
+				public TableCell<ServiceContractsWrapper, Boolean> call(final TableColumn<ServiceContractsWrapper, Boolean> param) {
+					final TableCell<ServiceContractsWrapper, Boolean> cell = new TableCell<ServiceContractsWrapper, Boolean>() {
+						final Button btnEdit = new Button();
+						Image imgEdit = new Image(getClass().getResourceAsStream("/images/edit.png"));
 
+						@Override
+						public void updateItem(Boolean check, boolean empty) {
+							super.updateItem(check, empty);
+							if (empty) {
+								setGraphic(null);
+								setText(null);
+							} else {
+								btnEdit.setOnAction(e -> {
+									ServiceContractsWrapper serviceContractsWrapper = getTableView().getItems().get(getIndex());
+									ServiceContracts serviceContracts = serviceContractsService.findByIdServiceContracts(serviceContractsWrapper.getIdServiceContracts());
+									try {
+										updateContract(serviceContracts);
+									} catch (IOException e1) {
+										e1.printStackTrace();
+									}
+								});
+
+								btnEdit.setStyle("-fx-background-color: transparent;");
+								ImageView iv = EditAndHistoryButton.getImageView(imgEdit);
+								btnEdit.setGraphic(iv);
+
+								setGraphic(btnEdit);
+								setAlignment(Pos.CENTER);
+								setText(null);
+							}
+						}
+
+						private void updateContract(ServiceContracts serviceContracts) throws IOException {
+							setServiceContracts(serviceContracts);
+							stageManager.switchSceneAndWait(FxmlView.UPDATESERVICECONTRACT);
+						}
+					};
+					return cell;
+				}
+			};
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -114,7 +169,7 @@ public class ServiceContractsController implements Initializable {
 		amountForPartsColumn.setCellValueFactory(new PropertyValueFactory<>("amountForParts"));
 		remainingWorkingTimeColumn.setCellValueFactory(new PropertyValueFactory<>("remainingWorkingTime"));
 		remainingAmountForPartsColumn.setCellValueFactory(new PropertyValueFactory<>("remainingAmountForParts"));
-		//editColumn.setCellFactory(cellEditFactory);
+		editColumn.setCellFactory(cellEditFactory);
 	}
 
 	public void loadContractsDetails() {

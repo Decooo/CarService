@@ -177,6 +177,17 @@ public enum FxmlView {
 		public String getFxmlFile() {
 			return "/fxml/serviceContracts/AddServiceContract.fxml";
 		}
+	},
+	UPDATESERVICECONTRACT {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("updateServiceContracts.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/serviceContracts/UpdateServiceContract.fxml";
+		}
 	};
 
 
