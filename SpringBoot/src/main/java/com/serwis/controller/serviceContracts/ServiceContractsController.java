@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -54,8 +55,6 @@ public class ServiceContractsController implements Initializable {
 	public TableColumn<ServiceContractsWrapper, Double> remainingAmountForPartsColumn;
 	@FXML
 	public TableColumn<ServiceContractsWrapper, Boolean> editColumn;
-	@FXML
-	public TableColumn<ServiceContractsWrapper, Boolean> historyColumn;
 	@FXML
 	private TextField searchTextField;
 	@FXML
@@ -116,7 +115,6 @@ public class ServiceContractsController implements Initializable {
 		remainingWorkingTimeColumn.setCellValueFactory(new PropertyValueFactory<>("remainingWorkingTime"));
 		remainingAmountForPartsColumn.setCellValueFactory(new PropertyValueFactory<>("remainingAmountForParts"));
 		//editColumn.setCellFactory(cellEditFactory);
-		//historyColumn.setCellFactory(cellHistoryFactory);
 	}
 
 	public void loadContractsDetails() {
@@ -147,7 +145,22 @@ public class ServiceContractsController implements Initializable {
 
 	@FXML
 	public void deleteContract(ActionEvent event) {
+		List<ServiceContractsWrapper> contracts = contractsTable.getSelectionModel().getSelectedItems();
+		List<ServiceContracts> deleteContracts = new ArrayList<>();
+		for (ServiceContractsWrapper sc : contracts) {
+			deleteContracts.add(serviceContractsService.findByIdServiceContracts(sc.getIdServiceContracts()));
+		}
+		alertDeleteContracts(deleteContracts);
+		loadContractsDetails();
 	}
 
+	private void alertDeleteContracts(List<ServiceContracts> contracts) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Potwierdzenie usuwania");
+		alert.setHeaderText(null);
+		alert.setContentText("Czy napewno chcesz usunąć wybrane umowy?");
+		Optional<ButtonType> result = alert.showAndWait();
 
+		if (result.get() == ButtonType.OK) serviceContractsService.deleteInBatch(contracts);
+	}
 }

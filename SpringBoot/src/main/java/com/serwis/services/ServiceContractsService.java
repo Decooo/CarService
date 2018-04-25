@@ -24,4 +24,11 @@ public class ServiceContractsService {
 		serviceContractsRepository.save(serviceContracts);
 	}
 
+	public ServiceContracts findByIdServiceContracts(int id){
+		return serviceContractsRepository.findByIdServiceContracts(id);
+	}
+
+	public void deleteInBatch(List<ServiceContracts> contracts) {
+			serviceContractsRepository.deleteInBatch(contracts);
+	}
 }

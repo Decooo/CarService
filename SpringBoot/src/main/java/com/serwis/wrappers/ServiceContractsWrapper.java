@@ -12,6 +12,7 @@ import java.util.List;
  */
 public class ServiceContractsWrapper {
 
+	private int idServiceContracts;
 	private String name;
 	private String surname;
 	private double amountForParts;
@@ -19,10 +20,13 @@ public class ServiceContractsWrapper {
 	private double remainingAmountForParts;
 	private double remainingWorkingTime;
 
-	public ObservableList<ServiceContractsWrapper> serviceContractsWrappers(List<Clients> clients, List<ServiceContracts> contracts){
+
+
+	public ObservableList<ServiceContractsWrapper> serviceContractsWrappers(List<Clients> clients, List<ServiceContracts> contracts) {
 		ObservableList<ServiceContractsWrapper> serviceContractsList = FXCollections.observableArrayList();
-		for (int i = 0; i <contracts.size() ; i++) {
+		for (int i = 0; i < contracts.size(); i++) {
 			ServiceContractsWrapper serviceContractsWrapper = new ServiceContractsWrapper();
+			serviceContractsWrapper.setIdServiceContracts(contracts.get(i).getIdServiceContracts());
 			serviceContractsWrapper.setName(clients.get(i).getName());
 			serviceContractsWrapper.setSurname(clients.get(i).getSurname());
 			serviceContractsWrapper.setAmountForParts(contracts.get(i).getAmountForParts());
@@ -34,6 +38,13 @@ public class ServiceContractsWrapper {
 		return serviceContractsList;
 	}
 
+	public int getIdServiceContracts() {
+		return idServiceContracts;
+	}
+
+	public void setIdServiceContracts(int idServiceContracts) {
+		this.idServiceContracts = idServiceContracts;
+	}
 	public String getName() {
 		return name;
 	}

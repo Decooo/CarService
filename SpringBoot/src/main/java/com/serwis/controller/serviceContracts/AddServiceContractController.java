@@ -1,6 +1,5 @@
-package com.serwis.controller.cars;
+package com.serwis.controller.serviceContracts;
 
-import com.serwis.controller.serviceContracts.ServiceContractsController;
 import com.serwis.entity.Clients;
 import com.serwis.entity.ServiceContracts;
 import com.serwis.services.ClientsService;

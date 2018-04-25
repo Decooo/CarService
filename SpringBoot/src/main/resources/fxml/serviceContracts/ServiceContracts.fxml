@@ -20,10 +20,9 @@
             <TableColumn fx:id="surnameColumn" prefWidth="137.0" text="Nazwisko" />
             <TableColumn fx:id="workingTimeColumn" prefWidth="106.0" text="Czas pracy" />
             <TableColumn fx:id="amountForPartsColumn" prefWidth="105.0" text="Kwota na części" />
-            <TableColumn fx:id="remainingWorkingTimeColumn" prefWidth="131.0" text="Pozostały czas pracy" />
-            <TableColumn fx:id="remainingAmountForPartsColumn" prefWidth="165.0" text="Pozostała kwota na części" />
-            <TableColumn fx:id="editColumn" prefWidth="60.0" text="Edytuj" />
-            <TableColumn fx:id="historyColumn" prefWidth="55.0" text="Historia" />
+            <TableColumn fx:id="remainingWorkingTimeColumn" prefWidth="87.0" text="Pozostały czas pracy" />
+            <TableColumn fx:id="remainingAmountForPartsColumn" prefWidth="143.0" text="Pozostała kwota na części" />
+            <TableColumn fx:id="editColumn" prefWidth="61.0" text="Edytuj" />
         </columns>
          <contextMenu>
             <ContextMenu onAction="#deleteContract">

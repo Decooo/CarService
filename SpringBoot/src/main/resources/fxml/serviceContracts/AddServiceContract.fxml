@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.cars.AddServiceContractController">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.serviceContracts.AddServiceContractController">
    <children>
       <Button fx:id="backButton" layoutX="482.0" layoutY="526.0" mnemonicParsing="false" onAction="#backAction" text="Powrót" />
       <TextField fx:id="textWorkingTime" layoutX="205.0" layoutY="108.0" promptText="czas pracy" />
