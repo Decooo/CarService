@@ -53,11 +53,6 @@ public class Clients {
 
 	@Override
 	public String toString() {
-		return "Clients{" +
-				"idClients=" + idClients +
-				", name='" + name + '\'' +
-				", surname='" + surname + '\'' +
-				", pesel=" + pesel +
-				'}';
+		return name + " " + surname;
 	}
 }

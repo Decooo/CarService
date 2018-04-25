@@ -50,4 +50,19 @@ public class ManagerController implements Initializable {
 	public void listAccountsAction(ActionEvent event) throws IOException {
 		stageManager.switchSceneAndWait(FxmlView.LISTACCOUNTS);
 	}
+
+	@FXML
+	public void openCarsListAction(ActionEvent event) throws IOException {
+		stageManager.switchSceneAndWait(FxmlView.CARS);
+	}
+
+	@FXML
+	public void openCardsClientsAction(ActionEvent event) throws IOException {
+		stageManager.switchSceneAndWait(FxmlView.CLIENTS);
+	}
+
+	@FXML
+	public void openServiceContractsAction(ActionEvent event) throws IOException {
+	stageManager.switchSceneAndWait(FxmlView.SERVICECONTRACTS);
+	}
 }
