@@ -69,9 +69,12 @@ public class ClientsServiceTest {
 	@Test
 	public void findByIdClients() throws Exception {
 		List<Clients> clientsList = clientsRepository.findAll();
-		Clients clients = clientsRepository.findByIdClients(clientsList.get(0).getIdClients());
-		assertEquals(clients.getPesel(), clientsList.get(0).getPesel());
-		assertEquals(clients.getSurname(), clientsList.get(0).getSurname());
+		if (!clientsList.isEmpty()) {
+
+			Clients clients = clientsRepository.findByIdClients(clientsList.get(0).getIdClients());
+			assertEquals(clients.getPesel(), clientsList.get(0).getPesel());
+			assertEquals(clients.getSurname(), clientsList.get(0).getSurname());
+		}
 
 	}
 
