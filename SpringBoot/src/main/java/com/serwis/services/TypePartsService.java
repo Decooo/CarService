@@ -18,4 +18,8 @@ public class TypePartsService {
 	public List<TypeParts> findAll() {
 	return typePartsRepository.findAll();
 	}
+
+	public TypeParts getType(int idParts){
+		return typePartsRepository.findByidTypeParts(idParts);
+	}
 }

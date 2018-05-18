@@ -199,6 +199,17 @@ public enum FxmlView {
 		public String getFxmlFile() {
 			return "/fxml/parts/addParts.fxml";
 		}
+	},
+	LISTPARTS {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("listParts.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/parts/listParts.fxml";
+		}
 	};
 
 

@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface TypePartsRepository extends JpaRepository<TypeParts, Integer>{
+
+	 TypeParts findByidTypeParts(int idParts);
 }

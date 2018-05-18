@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="520.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.parts.ListPartsController">
+   <children>
+      <TextField fx:id="searchField" layoutX="174.0" layoutY="14.0" promptText="wyszukaj" />
+      <Button fx:id="backButton" layoutX="538.0" layoutY="14.0" mnemonicParsing="false" onAction="#backAction" text="Powrot" />
+      <TableView fx:id="partsTable" layoutY="47.0" prefHeight="475.0" prefWidth="775.0">
+        <columns>
+          <TableColumn fx:id="idColumn" prefWidth="75.0" text="L.p" />
+          <TableColumn fx:id="nameColumn" prefWidth="172.0" text="Nazwa" />
+            <TableColumn fx:id="typeColumn" prefWidth="174.0" text="Kategoria" />
+            <TableColumn fx:id="quantityColumn" minWidth="9.0" prefWidth="127.0" text="Ilosc" />
+            <TableColumn fx:id="priceColumn" prefWidth="139.0" text="Cena" />
+            <TableColumn fx:id="orderColumn" prefWidth="87.0" text="Zamów" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
