@@ -23,4 +23,12 @@ public class PartsService {
 	public List<Parts> findAll() {
 		return partsRepository.findAll();
 	}
+
+	public Parts findByIdParts(int idParts) {
+		return partsRepository.findByIdparts(idParts);
+	}
+
+	public void deleteInBatch(List<Parts> parts) {
+		partsRepository.deleteInBatch(parts);
+	}
 }

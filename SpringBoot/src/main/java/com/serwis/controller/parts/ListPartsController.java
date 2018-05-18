@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -113,6 +114,27 @@ public class ListPartsController implements Initializable {
 			}
 			partsTable.setItems(subentries);
 		});
+	}
+
+	@FXML
+	public void deleteParts(ActionEvent event) {
+		List<PartsWrapper> parts = partsTable.getSelectionModel().getSelectedItems();
+		List<Parts> deleteParts = new ArrayList<>();
+		for (PartsWrapper sc : parts) {
+			deleteParts.add(partsService.findByIdParts(sc.getIdParts()));
+		}
+		alertDeleteParts(deleteParts);
+		loadPartsDetails();
+	}
+
+	private void alertDeleteParts(List<Parts> parts) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Potwierdzenie usuwania");
+		alert.setHeaderText(null);
+		alert.setContentText("Czy napewno chcesz usunąć wybrane części?");
+		Optional<ButtonType> result = alert.showAndWait();
+
+		if (result.get() == ButtonType.OK) partsService.deleteInBatch(parts);
 	}
 
 	@FXML

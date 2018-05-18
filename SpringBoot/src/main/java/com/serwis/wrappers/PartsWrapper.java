@@ -12,10 +12,19 @@ import java.util.List;
  */
 public class PartsWrapper {
 
+	private int idParts;
 	private String name;
 	private String type;
 	private int quantity;
 	private double price;
+
+	public int getIdParts() {
+		return idParts;
+	}
+
+	public void setIdParts(int idParts) {
+		this.idParts = idParts;
+	}
 
 	public String getName() {
 		return name;
@@ -52,7 +61,8 @@ public class PartsWrapper {
 	public ObservableList<PartsWrapper> PartsWrapper(List<Parts> parts, List<TypeParts> typeParts) {
 		ObservableList<PartsWrapper> partsWrappers = FXCollections.observableArrayList();
 		for (int i = 0; i < parts.size(); i++) {
-			PartsWrapper part= new PartsWrapper();
+			PartsWrapper part = new PartsWrapper();
+			part.setIdParts(parts.get(i).getIdparts());
 			part.setName(parts.get(i).getName());
 			part.setQuantity(parts.get(i).getQuantity());
 			part.setPrice(parts.get(i).getPrice());
