@@ -1,6 +1,6 @@
 package com.serwis.repository;
 
-import com.serwis.entity.TypeParts;
+import com.serwis.entity.Parts;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
  * Created by jakub on 18.05.2018.
  */
 @Repository
-public interface TypePartsRepository extends JpaRepository<TypeParts, Integer>{
-
-	 TypeParts findByidTypeParts(int idParts);
+public interface PartsRepository extends JpaRepository<Parts,Integer>{
+	Parts findByIdparts(int idParts);
 }

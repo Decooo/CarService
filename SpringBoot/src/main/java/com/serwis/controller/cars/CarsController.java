@@ -169,7 +169,6 @@ public class CarsController implements Initializable {
 	private void ordinalNumber() {
 		idColumn.setCellValueFactory(p -> new ReadOnlyObjectWrapper(carsTable.getItems().indexOf(p.getValue()) + 1 + ""));
 		idColumn.setSortable(false);
-
 	}
 
 	private void setColumnProperties() {
