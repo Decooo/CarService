@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -40,5 +41,9 @@ public class WarehousemanController implements Initializable {
 		} else {
 			stageManager.switchScene(FxmlView.MANAGER);
 		}
+	}
+
+	public void addNewPartsAction(ActionEvent event) throws IOException {
+		stageManager.switchSceneAndWait(FxmlView.ADDPARTS);
 	}
 }

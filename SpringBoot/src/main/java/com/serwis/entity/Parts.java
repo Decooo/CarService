@@ -12,7 +12,7 @@ public class Parts {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idparts;
-	private int idTypeParts;
+	private int id_type_parts;
 	private String name;
 	private int quantity;
 	private double price;
@@ -21,7 +21,7 @@ public class Parts {
 	public String toString() {
 		return "Parts{" +
 				"idparts=" + idparts +
-				", idTypeParts=" + idTypeParts +
+				", id_type_parts=" + id_type_parts +
 				", name='" + name + '\'' +
 				", quantity=" + quantity +
 				", price=" + price +
@@ -36,12 +36,12 @@ public class Parts {
 		this.idparts = idparts;
 	}
 
-	public int getIdTypeParts() {
-		return idTypeParts;
+	public int getId_type_parts() {
+		return id_type_parts;
 	}
 
-	public void setIdTypeParts(int idTypeParts) {
-		this.idTypeParts = idTypeParts;
+	public void setId_type_parts(int id_type_parts) {
+		this.id_type_parts = id_type_parts;
 	}
 
 	public String getName() {
