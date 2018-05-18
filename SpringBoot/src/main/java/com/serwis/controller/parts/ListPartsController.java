@@ -6,6 +6,8 @@ import com.serwis.services.PartsService;
 import com.serwis.services.TypePartsService;
 import com.serwis.wrappers.PartsWrapper;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,7 +60,7 @@ public class ListPartsController implements Initializable {
 		ordinalNumber();
 		setColumnProperties();
 		loadPartsDetails();
-		//filtrationTable();
+		filtrationTable();
 	}
 
 	private void setColumnProperties() {
@@ -88,6 +90,29 @@ public class ListPartsController implements Initializable {
 	private void ordinalNumber() {
 		idColumn.setCellValueFactory(p -> new ReadOnlyObjectWrapper(partsTable.getItems().indexOf(p.getValue()) + 1 + ""));
 		idColumn.setSortable(false);
+	}
+
+	private void filtrationTable() {
+		ObservableList data = partsTable.getItems();
+		searchField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+			if (oldValue != null && (newValue.length() < oldValue.length())) {
+				partsTable.setItems(data);
+			}
+			String value = newValue.toLowerCase();
+			ObservableList<PartsWrapper> subentries = FXCollections.observableArrayList();
+
+			long count = partsTable.getColumns().stream().count();
+			for (int i = 0; i < partsTable.getItems().size(); i++) {
+				for (int j = 0; j < count; j++) {
+					String entry = "" + partsTable.getColumns().get(j).getCellData(i);
+					if (entry.toLowerCase().contains(value)) {
+						subentries.add(partsTable.getItems().get(i));
+						break;
+					}
+				}
+			}
+			partsTable.setItems(subentries);
+		});
 	}
 
 	@FXML
