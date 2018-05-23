@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="489.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.orders.CurrentOrderController">
+   <children>
+      <TableView fx:id="currentOrderTable" layoutY="45.0" prefHeight="442.0" prefWidth="710.0">
+        <columns>
+          <TableColumn fx:id="idColumn" prefWidth="57.0" text="L.p" />
+          <TableColumn fx:id="nameColumn" prefWidth="307.0" text="Nazwa" />
+            <TableColumn fx:id="quantityColumn" prefWidth="72.0" text="Ilość" />
+            <TableColumn fx:id="priceColumn" prefWidth="92.0" text="Cena" />
+            <TableColumn fx:id="valueColumn" prefWidth="91.0" text="Wartość" />
+            <TableColumn fx:id="changeQuantityColumn" prefWidth="90.0" text="Zmien ilosć" />
+        </columns>
+          <contextMenu>
+              <ContextMenu onAction="#deletePart">
+                  <items>
+                      <MenuItem mnemonicParsing="false" text="Usuń" />
+                  </items>
+              </ContextMenu>
+          </contextMenu>
+      </TableView>
+      <TextField fx:id="searchField" layoutX="14.0" layoutY="8.0" promptText="wyszukaj" />
+      <Button fx:id="backButton" layoutX="628.0" layoutY="8.0" mnemonicParsing="false" onAction="#backAction" text="Powrót" />
+      <Label fx:id="valueLabel" layoutX="218.0" layoutY="13.0" text="Wartość zamówienia: (wartosc) " />
+      <Button layoutX="489.0" layoutY="8.0" mnemonicParsing="false" text="Złóż zamowienie" />
+   </children>
+</AnchorPane>

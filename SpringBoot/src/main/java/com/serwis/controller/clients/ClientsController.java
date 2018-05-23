@@ -137,7 +137,7 @@ public class ClientsController implements Initializable {
 							}
 						}
 
-						private void historyClient(Clients clients) throws IOException {
+						private void historyClient(Clients client) throws IOException {
 							setClient(client);
 							stageManager.switchSceneAndWait(FxmlView.CLIENTHISTORY);
 						}
