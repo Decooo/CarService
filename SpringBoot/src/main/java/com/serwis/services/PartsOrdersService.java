@@ -39,4 +39,8 @@ public class PartsOrdersService {
 	public void deleteInBatch(List<PartsOrders> partsOrders){
 		partsOrdersRepository.deleteInBatch(partsOrders);
 	}
+
+	public void save(PartsOrders partsOrders){
+		partsOrdersRepository.save(partsOrders);
+	}
 }

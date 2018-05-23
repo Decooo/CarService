@@ -1,8 +1,10 @@
 package com.serwis.controller.orders;
 
 import com.serwis.config.StageManager;
+import com.serwis.entity.Orders;
 import com.serwis.entity.Parts;
 import com.serwis.entity.PartsOrders;
+import com.serwis.services.OrdersService;
 import com.serwis.services.PartsOrdersService;
 import com.serwis.services.PartsService;
 import com.serwis.util.imageSettings.EditAndHistoryButton;
@@ -28,10 +30,9 @@ import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by jakub on 23.05.2018.
@@ -40,32 +41,32 @@ import java.util.ResourceBundle;
 public class CurrentOrderController implements Initializable {
 
 	private static CurrentOrderWrapper currentOrderWrapper;
-
-	public static CurrentOrderWrapper getCurrentOrderWrapper() {
-		return currentOrderWrapper;
-	}
-
-	public static void setCurrentOrderWrapper(CurrentOrderWrapper currentOrderWrapper) {
-		CurrentOrderController.currentOrderWrapper = currentOrderWrapper;
-	}
-
+	@Autowired
+	private OrdersService ordersService;
+	private double totalValue = 0.0;
 	@FXML
 	private Label valueLabel;
 	@FXML
 	private TableView<CurrentOrderWrapper> currentOrderTable;
 	@FXML
-	private TableColumn<CurrentOrderWrapper,Integer> idColumn;
+	private TableColumn<CurrentOrderWrapper, Integer> idColumn;
 	@FXML
-	private TableColumn<CurrentOrderWrapper,String> nameColumn;
+	private TableColumn<CurrentOrderWrapper, String> nameColumn;
 	@FXML
-	private TableColumn<CurrentOrderWrapper,Integer> quantityColumn;
+	private TableColumn<CurrentOrderWrapper, Integer> quantityColumn;
 	@FXML
-	private TableColumn<CurrentOrderWrapper,Double> priceColumn;
+	private TableColumn<CurrentOrderWrapper, Double> priceColumn;
 	@FXML
-	private TableColumn<CurrentOrderWrapper,Double> valueColumn;
+	private TableColumn<CurrentOrderWrapper, Double> valueColumn;
 	@FXML
-	private TableColumn<CurrentOrderWrapper,Boolean> changeQuantityColumn;
-
+	private TableColumn<CurrentOrderWrapper, Boolean> changeQuantityColumn;
+	private List<Parts> partsList = new ArrayList<>();
+	private List<PartsOrders> partsOrdersList = new ArrayList<>();
+	@Autowired
+	private PartsOrdersService partsOrdersService;
+	@Lazy
+	@Autowired
+	private StageManager stageManager;
 	private Callback<TableColumn<CurrentOrderWrapper, Boolean>, TableCell<CurrentOrderWrapper, Boolean>> cellEditFactory =
 			new Callback<TableColumn<CurrentOrderWrapper, Boolean>, TableCell<CurrentOrderWrapper, Boolean>>() {
 				@Override
@@ -108,22 +109,20 @@ public class CurrentOrderController implements Initializable {
 					return cell;
 				}
 			};
-
-	private List<Parts> partsList = new ArrayList<>();
-	private List<PartsOrders> partsOrdersList = new ArrayList<>();
-
-	@Autowired
-	private PartsOrdersService partsOrdersService;
-	@Lazy
-	@Autowired
-	private StageManager stageManager;
 	@Autowired
 	private PartsService partsService;
-
 	@FXML
 	private TextField searchField;
 	@FXML
 	private Button backButton;
+
+	public static CurrentOrderWrapper getCurrentOrderWrapper() {
+		return currentOrderWrapper;
+	}
+
+	public static void setCurrentOrderWrapper(CurrentOrderWrapper currentOrderWrapper) {
+		CurrentOrderController.currentOrderWrapper = currentOrderWrapper;
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -144,7 +143,7 @@ public class CurrentOrderController implements Initializable {
 	public void loadOrdersDetails() {
 		partsList.clear();
 		partsOrdersList.clear();
-		partsOrdersList=partsOrdersService.findAllById_OrdersIsNullIsZero();
+		partsOrdersList = partsOrdersService.findAllById_OrdersIsNullIsZero();
 
 		for (PartsOrders list : partsOrdersList) {
 			Parts part = partsService.findByIdParts(list.getId_parts());
@@ -158,13 +157,13 @@ public class CurrentOrderController implements Initializable {
 	}
 
 	private void loadTotalValue() {
-		double totalValue = 0.0;
+		totalValue = 0.0;
 		CurrentOrderWrapper wrapper = new CurrentOrderWrapper();
 		ObservableList<CurrentOrderWrapper> currentOrderWrappers = wrapper.currentOrderWrappers(partsList, partsOrdersList);
-		for(CurrentOrderWrapper w : currentOrderWrappers){
+		for (CurrentOrderWrapper w : currentOrderWrappers) {
 			totalValue += w.getValue();
 		}
-		totalValue= Math.round(totalValue*100.0)/100.0;
+		totalValue = Math.round(totalValue * 100.0) / 100.0;
 		valueLabel.setText("Wartość zamówienia: " + totalValue);
 	}
 
@@ -215,6 +214,7 @@ public class CurrentOrderController implements Initializable {
 
 
 	}
+
 	private void alertDeleteParts(List<PartsOrders> parts) {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		alert.setTitle("Potwierdzenie usuwania");
@@ -223,5 +223,32 @@ public class CurrentOrderController implements Initializable {
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK) partsOrdersService.deleteInBatch(parts);
+	}
+
+	@FXML
+	public void submitOrderAction(ActionEvent event) throws ParseException {
+		//stworzenie nowego zamówienia
+		if (totalValue > 0) {
+			Orders order = new Orders();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = sdf.parse(sdf.format(new Date()));
+			order.setDate(date);
+			order.setStatus("Zakonczono");
+			order.setValue(totalValue);
+			ordersService.saveAndFlush(order);
+
+			//aktualizacja bieżacych zamówień z id 0 na id nowego zamówienia
+			//Zwiększenie stanu magazynu o zamówione części
+			List<PartsOrders> orderedParts = partsOrdersService.findAllById_OrdersIsNullIsZero();
+			for (PartsOrders po : orderedParts) {
+				po.setIdOrders(order.getIdOrders());
+				partsOrdersService.save(po);
+
+				Parts part = partsService.findByIdParts(po.getId_parts());
+				part.setQuantity(part.getQuantity() + po.getQuantity());
+				partsService.save(part);
+			}
+			loadOrdersDetails();
+		}
 	}
 }

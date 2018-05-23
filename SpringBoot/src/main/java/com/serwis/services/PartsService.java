@@ -16,7 +16,7 @@ public class PartsService {
 	@Autowired
 	private PartsRepository partsRepository;
 
-	public void addParts(Parts part) {
+	public void save(Parts part) {
 		partsRepository.save(part);
 	}
 
