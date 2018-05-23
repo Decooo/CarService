@@ -232,7 +232,18 @@ public enum FxmlView {
 		public String getFxmlFile() {
 			return "/fxml/orders/addPartToOrder.fxml";
 		}
-	};
+	},
+	UPDATEQUANTITYPARTTOORDER {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("updateQuantityPartToOrder.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/orders/updateQuantityPartToOrder.fxml";
+		}
+	};;
 
 
 	public abstract String getTitle();
