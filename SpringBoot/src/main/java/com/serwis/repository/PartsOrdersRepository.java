@@ -14,4 +14,5 @@ public interface PartsOrdersRepository extends JpaRepository<PartsOrders,Integer
 
 	List<PartsOrders> findAllByIdOrders(int IdOrders);
 
+	PartsOrders findByIdPartsOrders(int id);
 }

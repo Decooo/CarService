@@ -3,7 +3,6 @@ package com.serwis.controller.orders;
 import com.serwis.config.StageManager;
 import com.serwis.entity.Parts;
 import com.serwis.entity.PartsOrders;
-import com.serwis.services.OrdersService;
 import com.serwis.services.PartsOrdersService;
 import com.serwis.services.PartsService;
 import com.serwis.util.imageSettings.EditAndHistoryButton;
@@ -31,6 +30,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -112,13 +112,11 @@ public class CurrentOrderController implements Initializable {
 	private List<Parts> partsList = new ArrayList<>();
 	private List<PartsOrders> partsOrdersList = new ArrayList<>();
 
+	@Autowired
+	private PartsOrdersService partsOrdersService;
 	@Lazy
 	@Autowired
 	private StageManager stageManager;
-	@Autowired
-	private PartsOrdersService partsOrdersService;
-	@Autowired
-	private OrdersService ordersService;
 	@Autowired
 	private PartsService partsService;
 
@@ -166,7 +164,7 @@ public class CurrentOrderController implements Initializable {
 		for(CurrentOrderWrapper w : currentOrderWrappers){
 			totalValue += w.getValue();
 		}
-		totalValue= Math.round(totalValue*100)/100;
+		totalValue= Math.round(totalValue*100.0)/100.0;
 		valueLabel.setText("Wartość zamówienia: " + totalValue);
 	}
 
@@ -203,5 +201,27 @@ public class CurrentOrderController implements Initializable {
 	public void backAction(ActionEvent event) {
 		Stage stage = (Stage) backButton.getScene().getWindow();
 		stage.close();
+	}
+
+	@FXML
+	public void deletePart(ActionEvent event) {
+		List<CurrentOrderWrapper> parts = currentOrderTable.getSelectionModel().getSelectedItems();
+		List<PartsOrders> deleteParts = new ArrayList<>();
+		for (CurrentOrderWrapper sc : parts) {
+			deleteParts.add(partsOrdersService.findByIdParts(sc.getId_parts_orders()));
+		}
+		alertDeleteParts(deleteParts);
+		loadOrdersDetails();
+
+
+	}
+	private void alertDeleteParts(List<PartsOrders> parts) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Potwierdzenie usuwania");
+		alert.setHeaderText(null);
+		alert.setContentText("Czy napewno chcesz usunąć wybrane częsci z zamowienia?");
+		Optional<ButtonType> result = alert.showAndWait();
+
+		if (result.get() == ButtonType.OK) partsOrdersService.deleteInBatch(parts);
 	}
 }

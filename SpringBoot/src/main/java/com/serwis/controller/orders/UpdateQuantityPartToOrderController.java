@@ -62,7 +62,7 @@ public class UpdateQuantityPartToOrderController implements Initializable {
 			ValidationPartsAlert.notIntroducedOnlyNumbers();
 		} else {
 			PartsOrders part = new PartsOrders();
-			part.setId_parts_orders(CurrentOrderController.getCurrentOrderWrapper().getId_parts_orders());
+			part.setIdPartsOrders(CurrentOrderController.getCurrentOrderWrapper().getId_parts_orders());
 			part.setId_parts(CurrentOrderController.getCurrentOrderWrapper().getId_parts());
 			part.setQuantity(Integer.parseInt(quantityField.getText()));
 			partsOrdersService.addpart(part);

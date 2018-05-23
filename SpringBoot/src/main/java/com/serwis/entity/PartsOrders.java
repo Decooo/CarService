@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class PartsOrders {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id_parts_orders;
+	private int idPartsOrders;
 	private int id_parts;
 	private int idOrders;
 	private int quantity;
@@ -18,19 +18,19 @@ public class PartsOrders {
 	@Override
 	public String toString() {
 		return "PartsOrders{" +
-				"id_parts_orders=" + id_parts_orders +
+				"idPartsOrders=" + idPartsOrders +
 				", id_parts=" + id_parts +
 				", idOrders=" + idOrders +
 				", quantity=" + quantity +
 				'}';
 	}
 
-	public int getId_parts_orders() {
-		return id_parts_orders;
+	public int getIdPartsOrders() {
+		return idPartsOrders;
 	}
 
-	public void setId_parts_orders(int id_parts_orders) {
-		this.id_parts_orders = id_parts_orders;
+	public void setIdPartsOrders(int idPartsOrders) {
+		this.idPartsOrders = idPartsOrders;
 	}
 
 	public int getId_parts() {

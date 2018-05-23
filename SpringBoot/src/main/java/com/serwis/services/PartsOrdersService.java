@@ -27,4 +27,12 @@ public class PartsOrdersService {
 	public void addpart(PartsOrders part) {
 		partsOrdersRepository.save(part);
 	}
+
+	public PartsOrders findByIdParts(int id_parts_orders) {
+		return partsOrdersRepository.findByIdPartsOrders(id_parts_orders);
+	}
+
+	public void deleteInBatch(List<PartsOrders> partsOrders){
+		partsOrdersRepository.deleteInBatch(partsOrders);
+	}
 }

@@ -23,15 +23,21 @@ public class CurrentOrderWrapper {
 		ObservableList<CurrentOrderWrapper> currentOrderWrappers = FXCollections.observableArrayList();
 		for (int i = 0; i < partsOrders.size(); i++) {
 			CurrentOrderWrapper part = new CurrentOrderWrapper();
-			part.setId_parts_orders(partsOrders.get(i).getId_parts_orders());
+			part.setId_parts_orders(partsOrders.get(i).getIdPartsOrders());
 			part.setName(parts.get(i).getName());
 			part.setQuantity(partsOrders.get(i).getQuantity());
 			part.setPrice(parts.get(i).getPrice());
 			part.setId_parts(parts.get(i).getIdparts());
-			part.setValue(parts.get(i).getPrice() * partsOrders.get(i).getQuantity());
+			part.setValue(calculateValue(partsOrders.get(i).getQuantity(), parts.get(i).getPrice()));
 			currentOrderWrappers.add(part);
 		}
 		return currentOrderWrappers;
+	}
+
+	private double calculateValue(int quantity, double price){
+		double totalValue= quantity*price;
+		totalValue= Math.round(totalValue*100.0)/100.0;
+		return totalValue;
 	}
 
 	public int getId_parts_orders() {
