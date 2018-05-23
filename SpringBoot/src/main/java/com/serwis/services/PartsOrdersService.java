@@ -23,4 +23,8 @@ public class PartsOrdersService {
 	public List<PartsOrders> findAll() {
 		return partsOrdersRepository.findAll();
 	}
+
+	public void addpart(PartsOrders part) {
+		partsOrdersRepository.save(part);
+	}
 }

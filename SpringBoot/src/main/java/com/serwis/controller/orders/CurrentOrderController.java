@@ -104,6 +104,7 @@ public class CurrentOrderController implements Initializable {
 		for(CurrentOrderWrapper w : currentOrderWrappers){
 			totalValue += w.getValue();
 		}
+		totalValue= Math.round(totalValue*100)/100;
 		valueLabel.setText("Wartość zamówienia: " + totalValue);
 	}
 

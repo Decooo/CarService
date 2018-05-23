@@ -221,6 +221,17 @@ public enum FxmlView {
 		public String getFxmlFile() {
 			return "/fxml/orders/currentOrder.fxml";
 		}
+	},
+	ADDPARTTOORDER {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("addPartToOrder.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/orders/addPartToOrder.fxml";
+		}
 	};
 
 
