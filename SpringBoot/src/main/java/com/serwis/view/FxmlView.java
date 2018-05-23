@@ -243,7 +243,18 @@ public enum FxmlView {
 		public String getFxmlFile() {
 			return "/fxml/orders/updateQuantityPartToOrder.fxml";
 		}
-	};;
+	},
+	HISTORYORDERS {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("historyOrders.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/orders/historyOrders.fxml";
+		}
+	};
 
 
 	public abstract String getTitle();

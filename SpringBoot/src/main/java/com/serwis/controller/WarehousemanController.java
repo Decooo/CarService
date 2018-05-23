@@ -56,4 +56,9 @@ public class WarehousemanController implements Initializable {
 	public void ordersAction(ActionEvent event) throws IOException {
 		stageManager.switchSceneAndWait(FxmlView.CURRENTORDER);
 	}
+
+	@FXML
+	public void historyOrdersAction(ActionEvent event) throws IOException {
+		stageManager.switchSceneAndWait(FxmlView.HISTORYORDERS);
+	}
 }
