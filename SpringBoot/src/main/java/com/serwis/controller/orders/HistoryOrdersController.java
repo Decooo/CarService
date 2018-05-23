@@ -3,7 +3,6 @@ package com.serwis.controller.orders;
 import com.serwis.config.StageManager;
 import com.serwis.entity.Orders;
 import com.serwis.services.OrdersService;
-import com.serwis.util.date.CustomDate;
 import com.serwis.util.imageSettings.EditAndHistoryButton;
 import com.serwis.view.FxmlView;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -26,6 +25,8 @@ import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 /**
@@ -45,7 +46,7 @@ public class HistoryOrdersController implements Initializable {
 	@FXML
 	private TableColumn<Orders, Integer> idColumn;
 	@FXML
-	private TableColumn<Orders, CustomDate> dateColumn;
+	private TableColumn<Orders, Date> dateColumn;
 	@FXML
 	private TableColumn<Orders, String> statusColumn;
 	@FXML
@@ -121,6 +122,25 @@ public class HistoryOrdersController implements Initializable {
 		valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 		detailColumn.setCellFactory(cellHistoryFactory);
+
+		dateColumn.setCellFactory(column -> {
+			TableCell<Orders, Date> celll = new TableCell<Orders, Date>() {
+				private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+				@Override
+				protected void updateItem(Date item, boolean empty) {
+					super.updateItem(item, empty);
+					if (empty) {
+						setText(null);
+					} else {
+						setText(format.format(item));
+					}
+				}
+			};
+
+			return celll;
+		});
+
 	}
 
 	public void loadOrdersDetails() {
