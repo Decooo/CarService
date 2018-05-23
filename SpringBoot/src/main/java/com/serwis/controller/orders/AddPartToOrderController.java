@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -55,8 +56,23 @@ public class AddPartToOrderController implements Initializable {
 			ValidationPartsAlert.notIntroducedOnlyNumbers();
 		} else {
 			PartsOrders part = new PartsOrders();
+			List<PartsOrders> alreadyOrderedList = partsOrdersService.findAllById_OrdersIsNullIsZero();
+			Boolean alreadyOrdered = false;
+			int alreadyOrderedQuantity = 0;
+			for (PartsOrders p : alreadyOrderedList) {
+				if (p.getId_parts() == ListPartsController.getPartsWrapper().getIdParts()) {
+					alreadyOrdered = true;
+					part.setIdPartsOrders(p.getIdPartsOrders());
+					alreadyOrderedQuantity = p.getQuantity();
+					break;
+				}
+			}
+			if (alreadyOrdered) {
+				part.setQuantity(alreadyOrderedQuantity + Integer.parseInt(quantityField.getText()));
+			} else {
+				part.setQuantity(Integer.parseInt(quantityField.getText()));
+			}
 			part.setId_parts(ListPartsController.getPartsWrapper().getIdParts());
-			part.setQuantity(Integer.parseInt(quantityField.getText()));
 			partsOrdersService.addpart(part);
 			alertAddedPartToOrder();
 		}
