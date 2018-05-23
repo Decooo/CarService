@@ -210,6 +210,17 @@ public enum FxmlView {
 		public String getFxmlFile() {
 			return "/fxml/parts/listParts.fxml";
 		}
+	},
+	CURRENTORDER {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("currentOrder.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/orders/currentOrder.fxml";
+		}
 	};
 
 

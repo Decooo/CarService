@@ -12,7 +12,6 @@ public class Orders {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idOrders;
-	private int idPartsOrders;
 	private String status;
 	private double value;
 
@@ -20,7 +19,6 @@ public class Orders {
 	public String toString() {
 		return "Orders{" +
 				"idOrders=" + idOrders +
-				", idPartsOrders=" + idPartsOrders +
 				", status='" + status + '\'' +
 				", value=" + value +
 				'}';
@@ -32,14 +30,6 @@ public class Orders {
 
 	public void setIdOrders(int idOrders) {
 		this.idOrders = idOrders;
-	}
-
-	public int getIdPartsOrders() {
-		return idPartsOrders;
-	}
-
-	public void setIdPartsOrders(int idPartsOrders) {
-		this.idPartsOrders = idPartsOrders;
 	}
 
 	public String getStatus() {

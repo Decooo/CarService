@@ -6,13 +6,13 @@ import javax.persistence.*;
  * Created by jakub on 23.05.2018.
  */
 @Entity
-@Table(name = "parts-orders")
+@Table(name = "parts_orders")
 public class PartsOrders {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id_parts_orders;
 	private int id_parts;
-	private int id_orders;
+	private int idOrders;
 	private int quantity;
 
 	@Override
@@ -20,7 +20,7 @@ public class PartsOrders {
 		return "PartsOrders{" +
 				"id_parts_orders=" + id_parts_orders +
 				", id_parts=" + id_parts +
-				", id_orders=" + id_orders +
+				", idOrders=" + idOrders +
 				", quantity=" + quantity +
 				'}';
 	}
@@ -41,12 +41,12 @@ public class PartsOrders {
 		this.id_parts = id_parts;
 	}
 
-	public int getId_orders() {
-		return id_orders;
+	public int getIdOrders() {
+		return idOrders;
 	}
 
-	public void setId_orders(int id_orders) {
-		this.id_orders = id_orders;
+	public void setIdOrders(int idOrders) {
+		this.idOrders = idOrders;
 	}
 
 	public int getQuantity() {
