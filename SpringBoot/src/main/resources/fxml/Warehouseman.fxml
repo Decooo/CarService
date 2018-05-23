@@ -16,7 +16,7 @@
       </TableView>
       <Button layoutX="105.0" layoutY="157.0" mnemonicParsing="false" onAction="#ordersAction" text="Zamówienie" />
       <Button layoutX="114.0" layoutY="74.0" mnemonicParsing="false" onAction="#listPartsAction" text="Magazyn" />
-      <Button layoutX="92.0" layoutY="231.0" mnemonicParsing="false" text="Historia zamówień" />
+      <Button layoutX="92.0" layoutY="231.0" mnemonicParsing="false" onAction="#historyOrdersAction" text="Historia zamówień" />
       <Button layoutX="82.0" layoutY="325.0" mnemonicParsing="false" onAction="#addNewPartsAction" text="Dodanie nowej czesci" />
    </children>
 </AnchorPane>

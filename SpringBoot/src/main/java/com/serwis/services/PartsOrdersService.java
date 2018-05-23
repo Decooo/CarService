@@ -20,6 +20,10 @@ public class PartsOrdersService {
 		return partsOrdersRepository.findAllByIdOrders(0);
 	}
 
+	public List<PartsOrders> findAllById_Orders(int IdOrders) {
+		return partsOrdersRepository.findAllByIdOrders(IdOrders);
+	}
+
 	public List<PartsOrders> findAll() {
 		return partsOrdersRepository.findAll();
 	}
@@ -34,5 +38,9 @@ public class PartsOrdersService {
 
 	public void deleteInBatch(List<PartsOrders> partsOrders){
 		partsOrdersRepository.deleteInBatch(partsOrders);
+	}
+
+	public void save(PartsOrders partsOrders){
+		partsOrdersRepository.save(partsOrders);
 	}
 }

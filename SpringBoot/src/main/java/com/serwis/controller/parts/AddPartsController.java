@@ -92,7 +92,7 @@ public class AddPartsController implements Initializable {
 			part.setPrice(Double.parseDouble(priceTextField.getText()));
 			part.setId_type_parts(map.get(typeComboBox.getSelectionModel().getSelectedItem()));
 			System.out.println("ID: " +map.get(typeComboBox.getSelectionModel().getSelectedItem()));
-			partsService.addParts(part);
+			partsService.save(part);
 			alertAddedNewPart();
 		}
 	}

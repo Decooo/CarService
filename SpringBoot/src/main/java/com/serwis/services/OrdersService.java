@@ -19,4 +19,8 @@ public class OrdersService {
 	public List<Orders> findAll(){
 		return ordersRepository.findAll();
 	}
+
+	public void saveAndFlush(Orders orders){
+		ordersRepository.saveAndFlush(orders);
+	}
 }
