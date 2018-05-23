@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.orders.DetailsOrderController">
+   <children>
+      <TableView fx:id="detailsOrderTable" layoutY="4.0" prefHeight="394.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="idColumn" prefWidth="75.0" text="L.p" />
+          <TableColumn fx:id="nameColumn" prefWidth="220.0" text="Nazwa" />
+            <TableColumn fx:id="quantityColumn" prefWidth="86.0" text="Ilość" />
+            <TableColumn fx:id="priceColumn" prefWidth="102.0" text="Cena" />
+            <TableColumn fx:id="valueColumn" prefWidth="116.0" text="Wartość" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
