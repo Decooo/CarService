@@ -9,11 +9,15 @@
    <children>
       <TableView layoutX="294.0" prefHeight="800.0" prefWidth="806.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn prefWidth="62.0" text="L.p" />
+          <TableColumn prefWidth="203.0" text="Samochód" />
+            <TableColumn prefWidth="206.0" text="Klient" />
+            <TableColumn prefWidth="135.0" text="Data rozpoczecia" />
+            <TableColumn prefWidth="122.0" text="Status" />
+            <TableColumn prefWidth="77.0" text="Podglad" />
         </columns>
       </TableView>
-      <Button layoutX="98.0" layoutY="64.0" mnemonicParsing="false" text="Nowe zlecenie" />
+      <Button layoutX="98.0" layoutY="64.0" mnemonicParsing="false" onAction="#newRepair" text="Nowe zlecenie" />
       <Button layoutX="98.0" layoutY="132.0" mnemonicParsing="false" text="Historia zleceń" />
       <Button fx:id="logoutButton" layoutX="119.0" layoutY="727.0" mnemonicParsing="false" onAction="#logoutAction" text="Wyloguj" />
       <Button layoutX="108.0" layoutY="199.0" mnemonicParsing="false" onAction="#openCarsListAction" text="Samochody" />
