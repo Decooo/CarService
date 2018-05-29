@@ -1,0 +1,117 @@
+/*javaagent:"C:\Program Files\Java\scenicView.jar"*/
+* {
+    -fx-dark : #2b2b2b;
+    -fx-dark2 : #313335;
+    -fx-dark3 : #3c3f41;
+    -fx-dark4 : #484c4e;
+    -fx-gray : #c9c9c9;
+    -fx-blue : #3f92b0;
+}
+
+#background{
+
+    -fx-background-color: -fx-dark3;
+}
+
+#button{
+    -fx-text-fill: -fx-gray;
+    -fx-background-color: -fx-dark3;
+    -fx-border-color: -fx-dark2;
+    -fx-border-radius: 2px;
+    -fx-background-radius: 2px;
+    -fx-font-size: 10pt;
+}
+
+#button:hover{
+    -fx-border-color: -fx-blue;
+    -fx-background-color: -fx-blue;
+    -fx-text-fill: -fx-gray;
+}
+
+#text-field
+{
+    -fx-text-fill: -fx-gray;
+    -fx-font-size : 10pt;
+    -jfx-focus-color: -fx-blue;
+    -fx-text-fill: derive(-fx-gray, 20%);
+}
+
+#text-field2
+{
+    -fx-text-fill: -fx-gray;
+    -fx-font-size : 30pt;
+    -jfx-focus-color: -fx-blue ;
+    -fx-text-fill: derive(-fx-gray, 20%);
+}
+#combo-box{
+    -fx-text-fill: -fx-gray;
+    -fx-prompt-text-fill: -fx-gray;
+    -fx-font-size: 10pt;
+}
+.jfx-combo-box{
+    -fx-background-color: -fx-dark3;
+    -fx-text-fill: #D34336;
+    -fx-prompt-text-fill: #D34336;
+    -fx-highlight-text-fill: #D34336;
+    -fx-font-size: 10pt;
+    -jfx-focus-color: -fx-blue;
+}
+
+.combo-box .combo-box-button-container{
+    -fx-text-fill: -fx-gray;
+    -fx-font-size: 10pt;
+}
+.combo-box-popup .combo-box-button-container{
+
+}
+.combo-box-popup .list-view .jfx-list-cell:odd:selected .jfx-list-cell-container,
+.combo-box-popup .list-view .jfx-list-cell:even:selected .jfx-list-cell-container {
+    -fx-background-color: -fx-blue;
+}
+
+.combo-box-popup .list-view .jfx-list-cell {
+    -fx-background-insets: 0.0;
+    -fx-text-fill: -fx-gray;
+}
+
+.combo-box-popup .list-view .jfx-list-cell:odd:hover,
+.combo-box-popup .list-view .jfx-list-cell:even:hover {
+    -fx-background-color: -fx-blue;
+}
+
+.combo-box-popup .list-view .jfx-list-cell:odd,
+.combo-box-popup .list-view .jfx-list-cell:even {
+    -fx-background-color: -fx-dark3;
+
+}
+.table {
+    -fx-background-color: -fx-dark3;
+
+}
+.table-row-cell{
+    -fx-background-color: -fx-table-cell-border-color, -fx-dark4;
+    -fx-text-fill: -fx-gray;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: -fx-gray;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: -fx-table-cell-border-color, -fx-dark3;
+    -fx-text-fill: -fx-gray;
+}
+
+
+.table-row-cell:selected {
+    -fx-background-color: -fx-blue;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+.table-view .column-header {
+    -fx-background-color: linear-gradient(-fx-dark 0%, -fx-dark2 100%);
+}
+.table-view .column-header-background .label{
+    -fx-text-fill: -fx-gray;
+}
