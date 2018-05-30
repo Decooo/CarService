@@ -28,7 +28,7 @@
          </image>
       </ImageView>
       <JFXButton id="button" fx:id="btnLogin" layoutX="152.0" layoutY="260.0" onAction="#loginAction" text="Zaloguj" />
-      <JFXButton id="button" layoutX="43.0" layoutY="260.0" prefHeight="30.0" prefWidth="65.0" text="Wyjdz">
+      <JFXButton id="button" layoutX="43.0" layoutY="260.0" prefHeight="30.0" onAction="#exit" prefWidth="65.0" text="Wyjdz">
          <font>
             <Font size="11.0" />
          </font>
