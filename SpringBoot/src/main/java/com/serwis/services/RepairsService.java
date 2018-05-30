@@ -30,5 +30,8 @@ public class RepairsService {
 	public List<Repairs> findByIdClient(int idClient){
 		return repairsRepository.findByIdClient(idClient);
 	}
+	public List<Repairs> findByStatusIsNot(String status){
+		return repairsRepository.findByStatusIsNot(status);
+	}
 
 }

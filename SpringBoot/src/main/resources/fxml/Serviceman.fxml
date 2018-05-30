@@ -7,14 +7,14 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.ServicemanController">
    <children>
-      <TableView layoutX="294.0" prefHeight="800.0" prefWidth="806.0">
+      <TableView fx:id="repairsTable" layoutX="294.0" prefHeight="800.0" prefWidth="806.0">
         <columns>
-          <TableColumn prefWidth="62.0" text="L.p" />
-          <TableColumn prefWidth="203.0" text="Samochód" />
-            <TableColumn prefWidth="206.0" text="Klient" />
-            <TableColumn prefWidth="135.0" text="Data rozpoczecia" />
-            <TableColumn prefWidth="122.0" text="Status" />
-            <TableColumn prefWidth="77.0" text="Podglad" />
+          <TableColumn fx:id="idColumn" prefWidth="62.0" text="L.p" />
+          <TableColumn fx:id="carColumn" prefWidth="203.0" text="Samochód" />
+            <TableColumn fx:id="clientColumn" prefWidth="206.0" text="Klient" />
+            <TableColumn fx:id="dateColumn" prefWidth="135.0" text="Data rozpoczecia" />
+            <TableColumn fx:id="statusColumn" prefWidth="122.0" text="Status" />
+            <TableColumn fx:id="detailsColumn" prefWidth="77.0" text="Podglad" />
         </columns>
       </TableView>
       <Button layoutX="98.0" layoutY="64.0" mnemonicParsing="false" onAction="#newRepair" text="Nowe zlecenie" />

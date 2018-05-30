@@ -1,5 +1,6 @@
 package com.serwis.controller.repairs;
 
+import com.serwis.controller.ServicemanController;
 import com.serwis.entity.Cars;
 import com.serwis.entity.Clients;
 import com.serwis.entity.Repairs;
@@ -29,6 +30,8 @@ import java.util.*;
  */
 @Controller
 public class AddRepairsController implements Initializable{
+	@Autowired
+	private ServicemanController servicemanController;
 	@Autowired
 	private RepairsService repairsService;
 	@Autowired
@@ -98,7 +101,7 @@ public class AddRepairsController implements Initializable{
 	private void doMapCar(List<Cars> list) {
 		mapCar.clear();
 		for (Cars aList : list) {
-			mapCar.put(aList.getBrand() + " " + aList.getModel() + " - " + aList.getVIN(), aList.getId_cars());
+			mapCar.put(aList.getBrand() + " " + aList.getModel() + " - " + aList.getVIN(), aList.getIdCars());
 		}
 	}
 
@@ -152,6 +155,7 @@ public class AddRepairsController implements Initializable{
 		if (result.get() == ButtonType.OK) {
 			Stage stage = (Stage) backButton.getScene().getWindow();
 			stage.close();
+			servicemanController.loadRepairsDetails();
 		}
 	}
 }
