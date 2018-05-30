@@ -12,4 +12,5 @@ import java.util.List;
 @Repository
 public interface RepairsRepository extends JpaRepository<Repairs, Integer>{
 	List<Repairs> findByIdCars(int idCars);
+	List<Repairs> findByIdClient(int idClient);
 }

@@ -27,4 +27,8 @@ public class RepairsService {
 		return repairsRepository.findByIdCars(idCars);
 	}
 
+	public List<Repairs> findByIdClient(int idClient){
+		return repairsRepository.findByIdClient(idClient);
+	}
+
 }

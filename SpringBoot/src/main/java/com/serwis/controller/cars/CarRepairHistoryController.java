@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -56,6 +58,24 @@ public class CarRepairHistoryController implements Initializable {
 		typeColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 		dateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
 		priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+		dateColumn.setCellFactory(column -> {
+			TableCell<Repairs, Date> cell = new TableCell<Repairs, Date>() {
+				private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+				@Override
+				protected void updateItem(Date item, boolean empty) {
+					super.updateItem(item, empty);
+					if (empty) {
+						setText(null);
+					} else {
+						setText(format.format(item));
+					}
+				}
+			};
+
+			return cell;
+		});
+
 
 	}
 
