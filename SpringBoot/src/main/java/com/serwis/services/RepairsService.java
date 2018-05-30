@@ -5,6 +5,8 @@ import com.serwis.repository.RepairsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by jakub on 29.05.2018.
  */
@@ -16,4 +18,13 @@ public class RepairsService {
 	public void save(Repairs repairs) {
 		repairsRepository.save(repairs);
 	}
+
+	public List<Repairs> findAll() {
+		return repairsRepository.findAll();
+	}
+
+	public List<Repairs> findByIdCars(int idCars){
+		return repairsRepository.findByIdCars(idCars);
+	}
+
 }
