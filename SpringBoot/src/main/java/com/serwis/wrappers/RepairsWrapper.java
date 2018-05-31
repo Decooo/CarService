@@ -18,7 +18,34 @@ public class RepairsWrapper {
 	private String client;
 	private Date date;
 	private String status;
+	private double price;
+	private double dedicatedTime;
 
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	private String comments;
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public double getDedicatedTime() {
+		return dedicatedTime;
+	}
+
+	public void setDedicatedTime(double dedicatedTime) {
+		this.dedicatedTime = dedicatedTime;
+	}
 
 	public ObservableList<RepairsWrapper> repairsWrappers(List<Cars> cars, List<Clients> clients, List<Repairs> repairs) {
 		ObservableList<RepairsWrapper> repairsWrappersList = FXCollections.observableArrayList();
@@ -29,6 +56,9 @@ public class RepairsWrapper {
 			repair.setStatus(repairs.get(i).getStatus());
 			repair.setCar(cars.get(i).getBrand() + " " + cars.get(i).getModel());
 			repair.setClient(clients.get(i).getName() + " " + clients.get(i).getSurname());
+			repair.setPrice(repairs.get(i).getPrice());
+			repair.setDedicatedTime(repairs.get(i).getDedicatedTime());
+			repair.setComments(repairs.get(i).getComments());
 			repairsWrappersList.add(repair);
 		}
 		return repairsWrappersList;
