@@ -3,6 +3,7 @@ package com.serwis.wrappers;
 import com.serwis.entity.Cars;
 import com.serwis.entity.Clients;
 import com.serwis.entity.Repairs;
+import com.serwis.entity.TypeRepairs;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -23,6 +24,15 @@ public class RepairsWrapper {
 	private int idCar;
 	private int idClient;
 	private int idTypeRepair;
+	private String typeRepairs;
+
+	public String getTypeRepairs() {
+		return typeRepairs;
+	}
+
+	public void setTypeRepairs(String typeRepairs) {
+		this.typeRepairs = typeRepairs;
+	}
 
 	public int getIdCar() {
 		return idCar;
@@ -74,7 +84,7 @@ public class RepairsWrapper {
 		this.dedicatedTime = dedicatedTime;
 	}
 
-	public ObservableList<RepairsWrapper> repairsWrappers(List<Cars> cars, List<Clients> clients, List<Repairs> repairs) {
+	public ObservableList<RepairsWrapper> repairsWrappers(List<Cars> cars, List<Clients> clients, List<Repairs> repairs, List<TypeRepairs> typeRepairs) {
 		ObservableList<RepairsWrapper> repairsWrappersList = FXCollections.observableArrayList();
 		for (int i = 0; i < repairs.size(); i++) {
 			RepairsWrapper repair = new RepairsWrapper();
@@ -89,6 +99,7 @@ public class RepairsWrapper {
 			repair.setIdTypeRepair(repairs.get(i).getIdTypeRepairs());
 			repair.setIdCar(repairs.get(i).getIdCars());
 			repair.setIdClient(repairs.get(i).getIdClient());
+			repair.setTypeRepairs(typeRepairs.get(i).getType());
 			repairsWrappersList.add(repair);
 		}
 		return repairsWrappersList;

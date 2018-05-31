@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface TypeRepairsRepository extends JpaRepository<TypeRepairs,Integer>{
+
+	TypeRepairs findByIdTypeRepairs(int idType);
 }

@@ -5,11 +5,13 @@ import com.serwis.config.StageManager;
 import com.serwis.entity.Cars;
 import com.serwis.entity.Clients;
 import com.serwis.entity.Repairs;
+import com.serwis.entity.TypeRepairs;
 import com.serwis.services.CarsService;
 import com.serwis.services.ClientsService;
 import com.serwis.services.RepairsService;
-import com.serwis.util.status.RepairStatus;
+import com.serwis.services.TypeRepairsService;
 import com.serwis.util.imageSettings.EditAndHistoryButton;
+import com.serwis.util.status.RepairStatus;
 import com.serwis.view.FxmlView;
 import com.serwis.wrappers.RepairsWrapper;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -47,6 +49,8 @@ public class ServicemanController implements Initializable {
 	private CarsService carsService;
 	@Autowired
 	private ClientsService clientsService;
+	@Autowired
+	private TypeRepairsService typeRepairsService;
 	@FXML
 	private TableView<RepairsWrapper> repairsTable;
 	@FXML
@@ -55,6 +59,8 @@ public class ServicemanController implements Initializable {
 	private TableColumn<RepairsWrapper, String> carColumn;
 	@FXML
 	private TableColumn<RepairsWrapper, String> clientColumn;
+	@FXML
+	private TableColumn<RepairsWrapper, String> typeRepairsColumn;
 	@FXML
 	private TableColumn<RepairsWrapper, Date> dateColumn;
 	@FXML
@@ -67,6 +73,8 @@ public class ServicemanController implements Initializable {
 	private List<Cars> carsList = new ArrayList<>();
 	private List<Clients> clientsList = new ArrayList<>();
 	private List<Repairs> repairsList = new ArrayList<>();
+	private List<TypeRepairs> typeRepairsList = new ArrayList<>();
+
 	@FXML
 	private Button logoutButton;
 	private Callback<TableColumn<RepairsWrapper, Boolean>, TableCell<RepairsWrapper, Boolean>> cellDetailsFactory =
@@ -135,6 +143,7 @@ public class ServicemanController implements Initializable {
 		clientColumn.setCellValueFactory(new PropertyValueFactory<>("client"));
 		dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+		typeRepairsColumn.setCellValueFactory(new PropertyValueFactory<>("typeRepairs"));
 		detailsColumn.setCellFactory(cellDetailsFactory);
 		dateColumn.setCellFactory(column -> {
 			TableCell<RepairsWrapper, Date> cell = new TableCell<RepairsWrapper, Date>() {
@@ -159,6 +168,7 @@ public class ServicemanController implements Initializable {
 		clientsList.clear();
 		carsList.clear();
 		repairsList.clear();
+		typeRepairsList.clear();
 		repairsList = repairsService.findByStatusIsNot(RepairStatus.ZAKONCZONE.getStatus());
 
 		for (Repairs list : repairsList) {
@@ -166,9 +176,11 @@ public class ServicemanController implements Initializable {
 			carsList.add(car);
 			Clients client = clientsService.findByIdClients(list.getIdClient());
 			clientsList.add(client);
+			TypeRepairs typeRepairs = typeRepairsService.findByIdTypeRepairs(list.getIdTypeRepairs());
+			typeRepairsList.add(typeRepairs);
 		}
 		RepairsWrapper wrapper = new RepairsWrapper();
-		ObservableList<RepairsWrapper> repairsWrappers = wrapper.repairsWrappers(carsList, clientsList, repairsList);
+		ObservableList<RepairsWrapper> repairsWrappers = wrapper.repairsWrappers(carsList, clientsList, repairsList,typeRepairsList);
 		repairsTable.setItems(repairsWrappers);
 		repairsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 	}
@@ -202,4 +214,7 @@ public class ServicemanController implements Initializable {
 		stageManager.switchSceneAndWait(FxmlView.ADDREPAIR);
 	}
 
+	public void historyAction(ActionEvent event) throws IOException {
+		stageManager.switchSceneAndWait(FxmlView.HISTORYREPAIRS);
+	}
 }

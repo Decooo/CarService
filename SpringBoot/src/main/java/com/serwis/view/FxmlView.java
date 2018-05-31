@@ -304,6 +304,16 @@ public enum FxmlView {
 		public String getFxmlFile() {
 			return "/fxml/orders/issuedParts.fxml";
 		}
+	},HISTORYREPAIRS {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("historyRepairs.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/repairs/historyRepairs.fxml";
+		}
 	};
 
 
