@@ -118,8 +118,6 @@ public class DetailsRepairController implements Initializable {
 		alert.getButtonTypes().setAll(ButtonType.OK);
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {
-			Stage stage = (Stage) backBtn.getScene().getWindow();
-			stage.close();
 			servicemanController.loadRepairsDetails();
 		}
 	}

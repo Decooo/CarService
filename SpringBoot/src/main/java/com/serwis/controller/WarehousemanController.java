@@ -6,6 +6,7 @@ import com.serwis.entity.IssuedParts;
 import com.serwis.entity.Parts;
 import com.serwis.services.IssuedPartsService;
 import com.serwis.services.PartsService;
+import com.serwis.util.imageSettings.EditAndHistoryButton;
 import com.serwis.util.status.IssuedPartsStatus;
 import com.serwis.view.FxmlView;
 import com.serwis.wrappers.IssuedPartsWrapper;
@@ -14,11 +15,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Callback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -72,11 +75,71 @@ public class WarehousemanController implements Initializable {
 		loadIssuedPartsDetails();
 	}
 
+	private Callback<TableColumn<IssuedPartsWrapper, Boolean>, TableCell<IssuedPartsWrapper, Boolean>> cellInOrderedFactory =
+			new Callback<TableColumn<IssuedPartsWrapper, Boolean>, TableCell<IssuedPartsWrapper, Boolean>>() {
+				@Override
+				public TableCell<IssuedPartsWrapper, Boolean> call(final TableColumn<IssuedPartsWrapper, Boolean> param) {
+					final TableCell<IssuedPartsWrapper, Boolean> cell = new TableCell<IssuedPartsWrapper, Boolean>() {
+						final Button btnInOrdered = new Button();
+						Image imgEdit = new Image(getClass().getResourceAsStream("/images/inOrdered.png"));
+
+						@Override
+						public void updateItem(Boolean check, boolean empty) {
+							super.updateItem(check, empty);
+							if (empty) {
+								setGraphic(null);
+								setText(null);
+							} else {
+								btnInOrdered.setOnAction(e -> {
+									IssuedPartsWrapper issuedPart = getTableView().getItems().get(getIndex());
+									try {
+										inOrdered(issuedPart);
+									} catch (IOException e1) {
+										e1.printStackTrace();
+									}
+								});
+
+								btnInOrdered.setStyle("-fx-background-color: transparent;");
+								ImageView iv = EditAndHistoryButton.getImageView(imgEdit);
+								btnInOrdered.setGraphic(iv);
+
+								setGraphic(btnInOrdered);
+								setAlignment(Pos.CENTER);
+								setText(null);
+							}
+						}
+
+						private void inOrdered(IssuedPartsWrapper issuedPart) throws IOException {
+							IssuedParts part = new IssuedParts();
+							part.setIdIssuedParts(issuedPart.getIdIssued());
+							part.setIdParts(issuedPart.getIdPart());
+							part.setQuantity(issuedPart.getQuantity());
+							part.setIdRepairs(issuedPart.getIdRepair());
+							part.setStatus(IssuedPartsStatus.WZAMOWIENIU.getStatus());
+							issuedPartsService.save(part);
+							alertUpdateStatus();
+						}
+
+						private void alertUpdateStatus() {
+							Alert alert = new Alert(Alert.AlertType.INFORMATION);
+							alert.setTitle("Zaaktualizowano status");
+							alert.setHeaderText("Zmieniono status na: W zamowieniu ");
+							alert.getButtonTypes().setAll(ButtonType.OK);
+							Optional<ButtonType> result = alert.showAndWait();
+							if (result.get() == ButtonType.OK) {
+								loadIssuedPartsDetails();
+							}
+						}
+					};
+					return cell;
+				}
+			};
+
 	private void setColumnProperties() {
 		nameColumn.setCellValueFactory(new PropertyValueFactory<>("namePart"));
 		quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-		//inOrderColumn.setCellFactory(cellDetailsFactory);
+		inOrderColumn.setCellFactory(cellInOrderedFactory);
 		//issueColumn.setCellFactory(cell);
 	}
 

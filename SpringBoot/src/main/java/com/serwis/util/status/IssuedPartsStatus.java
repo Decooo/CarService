@@ -13,7 +13,7 @@ public enum IssuedPartsStatus {
 	WZAMOWIENIU {
 		@Override
 		public String getStatus() {
-			return "W zamowieniu";
+			return "W zamówieniu";
 		}
 	},
 	ZAKONCZONE {
