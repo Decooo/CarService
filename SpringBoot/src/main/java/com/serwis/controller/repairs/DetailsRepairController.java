@@ -1,9 +1,11 @@
 package com.serwis.controller.repairs;
 
+import com.serwis.config.StageManager;
 import com.serwis.controller.ServicemanController;
 import com.serwis.entity.Repairs;
 import com.serwis.services.RepairsService;
-import com.serwis.util.RepairStatus;
+import com.serwis.util.status.RepairStatus;
+import com.serwis.view.FxmlView;
 import com.serwis.wrappers.RepairsWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
@@ -24,7 +27,10 @@ import java.util.ResourceBundle;
  * Created by jakub on 31.05.2018.
  */
 @Controller
-public class DetailsRepair implements Initializable {
+public class DetailsRepairController implements Initializable {
+	@Lazy
+	@Autowired
+	private StageManager stageManager;
 	@Autowired
 	private RepairsService repairsService;
 	@Autowired
@@ -77,7 +83,8 @@ public class DetailsRepair implements Initializable {
 	}
 
 	@FXML
-	public void orderPartAction(ActionEvent event) {
+	public void orderPartAction(ActionEvent event) throws IOException {
+		stageManager.switchSceneAndWait(FxmlView.ORDERPARTS);
 	}
 
 	@FXML
@@ -133,5 +140,8 @@ public class DetailsRepair implements Initializable {
 	public void backAction(ActionEvent event) {
 		Stage stage = (Stage) backBtn.getScene().getWindow();
 		stage.close();
+	}
+
+	public void loadIssuedParts() {
 	}
 }

@@ -8,10 +8,14 @@
 <AnchorPane prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.WarehousemanController">
    <children>
       <Button fx:id="logoutButton" layoutX="129.0" layoutY="737.0" mnemonicParsing="false" onAction="#logoutAction" text="Wyloguj" />
-      <TableView layoutX="281.0" prefHeight="800.0" prefWidth="819.0">
+      <TableView fx:id="orderedTable" layoutX="281.0" prefHeight="800.0" prefWidth="819.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="idColumn" prefWidth="75.0" text="L.p" />
+          <TableColumn fx:id="nameColumn" prefWidth="293.0" text="Nazwa" />
+            <TableColumn fx:id="quantityColumn" prefWidth="79.0" text="Ilość" />
+            <TableColumn fx:id="statusColumn" prefWidth="181.0" text="Status" />
+            <TableColumn fx:id="inOrderColumn" prefWidth="95.0" text="W zamówieniu" />
+            <TableColumn fx:id="issueColumn" prefWidth="95.0" text="Wydaj towar" />
         </columns>
       </TableView>
       <Button layoutX="105.0" layoutY="157.0" mnemonicParsing="false" onAction="#ordersAction" text="Zamówienie" />

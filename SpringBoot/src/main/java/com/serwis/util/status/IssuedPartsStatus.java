@@ -1,32 +1,25 @@
-package com.serwis.util;
+package com.serwis.util.status;
 
 /**
- * Created by jakub on 30.05.2018.
+ * Created by jakub on 31.05.2018.
  */
-public enum RepairStatus {
-
+public enum IssuedPartsStatus {
 	NOWE {
 		@Override
 		public String getStatus() {
 			return "Nowe";
 		}
 	},
-	WTRAKCIE {
+	WZAMOWIENIU {
 		@Override
 		public String getStatus() {
-			return "W trakcie";
+			return "W zamowieniu";
 		}
 	},
 	ZAKONCZONE {
 		@Override
 		public String getStatus() {
 			return "Zakonczone";
-		}
-	},
-	OCZEKIWANIENACZESCI {
-		@Override
-		public String getStatus() {
-			return "Ozcekiwanie na czesci";
 		}
 	};
 

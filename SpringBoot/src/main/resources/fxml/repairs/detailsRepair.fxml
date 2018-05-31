@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="726.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.repairs.DetailsRepair">
+<AnchorPane prefHeight="726.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.repairs.DetailsRepairController">
    <children>
       <Label layoutX="320.0" layoutY="14.0" text="Zlecenie">
          <font>
@@ -32,11 +31,12 @@
       <Label layoutX="258.0" layoutY="585.0" text="Status:" />
       <TableView layoutX="29.0" layoutY="335.0" prefHeight="222.0" prefWidth="651.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="L.p" />
+          <TableColumn prefWidth="45.0" text="L.p" />
           <TableColumn prefWidth="227.0" text="Nazwa" />
-            <TableColumn prefWidth="81.0" text="Ilość" />
-            <TableColumn prefWidth="146.0" text="Cena" />
-            <TableColumn prefWidth="121.0" text="Wartość całkowita" />
+            <TableColumn prefWidth="51.0" text="Ilość" />
+            <TableColumn prefWidth="119.0" text="Cena" />
+            <TableColumn prefWidth="117.0" text="Wartość całkowita" />
+            <TableColumn prefWidth="91.0" text="Status" />
         </columns>
       </TableView>
       <Label fx:id="priceLabel" layoutX="338.0" layoutY="625.0" text="calkowita cena" />

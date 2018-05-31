@@ -9,7 +9,7 @@ import com.serwis.services.CarsService;
 import com.serwis.services.ClientsService;
 import com.serwis.services.RepairsService;
 import com.serwis.services.TypeRepairsService;
-import com.serwis.util.RepairStatus;
+import com.serwis.util.status.RepairStatus;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

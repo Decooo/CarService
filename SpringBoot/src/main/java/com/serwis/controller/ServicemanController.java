@@ -8,7 +8,7 @@ import com.serwis.entity.Repairs;
 import com.serwis.services.CarsService;
 import com.serwis.services.ClientsService;
 import com.serwis.services.RepairsService;
-import com.serwis.util.RepairStatus;
+import com.serwis.util.status.RepairStatus;
 import com.serwis.util.imageSettings.EditAndHistoryButton;
 import com.serwis.view.FxmlView;
 import com.serwis.wrappers.RepairsWrapper;
