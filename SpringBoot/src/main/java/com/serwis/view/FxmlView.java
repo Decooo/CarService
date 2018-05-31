@@ -274,6 +274,46 @@ public enum FxmlView {
 		public String getFxmlFile() {
 			return "/fxml/repairs/addRepairs.fxml";
 		}
+	},DETAILREPAIRS {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("detailRepairs.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/repairs/detailsRepair.fxml";
+		}
+	},ORDERPARTS {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("orderParts.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/repairs/orderParts.fxml";
+		}
+	},ISSUEDPARTS {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("issuedParts.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/orders/issuedParts.fxml";
+		}
+	},HISTORYREPAIRS {
+		@Override
+		public String getTitle() {
+			return getStringFromResourceBundle("historyRepairs.title");
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/repairs/historyRepairs.fxml";
+		}
 	};
 
 

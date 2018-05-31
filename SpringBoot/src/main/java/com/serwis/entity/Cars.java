@@ -14,7 +14,7 @@ public class Cars {
 
 	@Id
 	@GeneratedValue
-	private int id_cars;
+	private int idCars;
 	private String brand;
 	private String model;
 	private int year_production;
@@ -24,7 +24,7 @@ public class Cars {
 	@Override
 	public String toString() {
 		return "cars{" +
-				"id_cars=" + id_cars +
+				"idCars=" + idCars +
 				", brand='" + brand + '\'' +
 				", model='" + model + '\'' +
 				", year_production=" + year_production +
@@ -33,12 +33,12 @@ public class Cars {
 				'}';
 	}
 
-	public int getId_cars() {
-		return id_cars;
+	public int getIdCars() {
+		return idCars;
 	}
 
-	public void setId_cars(int id_cars) {
-		this.id_cars = id_cars;
+	public void setIdCars(int idCars) {
+		this.idCars = idCars;
 	}
 
 	public String getBrand() {

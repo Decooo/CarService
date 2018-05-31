@@ -19,4 +19,8 @@ public class TypeRepairsService {
 	public List<TypeRepairs> findAll() {
 		return typeRepairsRepository.findAll();
 	}
+
+	public TypeRepairs findByIdTypeRepairs(int idTypeRepairs){
+		return typeRepairsRepository.findByIdTypeRepairs(idTypeRepairs);
+	}
 }

@@ -81,7 +81,7 @@ public class CarRepairHistoryController implements Initializable {
 
 	private void loadCarsDetails() {
 		historyList.clear();
-		historyList.addAll(repairsService.findByIdCars(CarsController.getCar().getId_cars()));
+		historyList.addAll(repairsService.findByIdCars(CarsController.getCar().getIdCars()));
 		carsTable.setItems(historyList);
 		carsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 	}

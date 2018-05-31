@@ -1,4 +1,4 @@
-package com.serwis.util;
+package com.serwis.util.status;
 
 /**
  * Created by jakub on 30.05.2018.
