@@ -66,9 +66,11 @@ public class DetailsRepair implements Initializable {
 	private ObservableList<String> doListStatus() {
 		statusList.clear();
 		for(RepairStatus status : RepairStatus.values()){
-			statusList.add(status.getStatus());
-			if(status.getStatus().equalsIgnoreCase(ServicemanController.getRepairs().getStatus())){
-				idStatus = statusList.size()-1;
+			if(!status.getStatus().equals(RepairStatus.ZAKONCZONE.getStatus())){
+				statusList.add(status.getStatus());
+				if(status.getStatus().equalsIgnoreCase(ServicemanController.getRepairs().getStatus())){
+					idStatus = statusList.size()-1;
+				}
 			}
 		}
 		return statusList;
