@@ -30,4 +30,8 @@ public class IssuedPartsService {
 	public List<IssuedParts> findAllByIdRepairs(int idRepairs){
 		return issuedPartsRepository.findAllByIdRepairs(idRepairs);
 	}
+
+	public List<IssuedParts> findByStatusIs(String status){
+		return  issuedPartsRepository.findByStatusIs(status);
+	}
 }
