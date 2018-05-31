@@ -20,6 +20,33 @@ public class RepairsWrapper {
 	private String status;
 	private double price;
 	private double dedicatedTime;
+	private int idCar;
+	private int idClient;
+	private int idTypeRepair;
+
+	public int getIdCar() {
+		return idCar;
+	}
+
+	public void setIdCar(int idCar) {
+		this.idCar = idCar;
+	}
+
+	public int getIdClient() {
+		return idClient;
+	}
+
+	public void setIdClient(int idClient) {
+		this.idClient = idClient;
+	}
+
+	public int getIdTypeRepair() {
+		return idTypeRepair;
+	}
+
+	public void setIdTypeRepair(int idTypeRepair) {
+		this.idTypeRepair = idTypeRepair;
+	}
 
 	public String getComments() {
 		return comments;
@@ -59,6 +86,9 @@ public class RepairsWrapper {
 			repair.setPrice(repairs.get(i).getPrice());
 			repair.setDedicatedTime(repairs.get(i).getDedicatedTime());
 			repair.setComments(repairs.get(i).getComments());
+			repair.setIdTypeRepair(repairs.get(i).getIdTypeRepairs());
+			repair.setIdCar(repairs.get(i).getIdCars());
+			repair.setIdClient(repairs.get(i).getIdClient());
 			repairsWrappersList.add(repair);
 		}
 		return repairsWrappersList;

@@ -1,6 +1,8 @@
 package com.serwis.controller.repairs;
 
 import com.serwis.controller.ServicemanController;
+import com.serwis.entity.Repairs;
+import com.serwis.services.RepairsService;
 import com.serwis.util.RepairStatus;
 import com.serwis.wrappers.RepairsWrapper;
 import javafx.collections.FXCollections;
@@ -10,9 +12,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -20,6 +25,10 @@ import java.util.ResourceBundle;
  */
 @Controller
 public class DetailsRepair implements Initializable {
+	@Autowired
+	private RepairsService repairsService;
+	@Autowired
+	private ServicemanController servicemanController;
 	@FXML
 	private Label priceLabel;
 	@FXML
@@ -29,7 +38,7 @@ public class DetailsRepair implements Initializable {
 	@FXML
 	private Label clientLabel;
 	@FXML
-	private TextArea commentsLabel;
+	private TextArea commentsText;
 	@FXML
 	private TextField dedicatedTimeText;
 	@FXML
@@ -52,7 +61,7 @@ public class DetailsRepair implements Initializable {
 		carLabel.setText(repair.getCar());
 		clientLabel.setText(repair.getClient());
 		dedicatedTimeText.setText(String.valueOf(repair.getDedicatedTime()));
-		commentsLabel.setText(repair.getComments());
+		commentsText.setText(repair.getComments());
 	}
 	private ObservableList<String> doListStatus() {
 		statusList.clear();
@@ -74,7 +83,48 @@ public class DetailsRepair implements Initializable {
 	}
 
 	@FXML
-	public void updateAction(ActionEvent event) {
+	public void updateAction(ActionEvent event) throws IOException {
+		Repairs repairs = new Repairs();
+		if(!textIsDouble(dedicatedTimeText.getText()) || dedicatedTimeText.getText().length()==0){
+			errorIntroducedDedicatedTime();
+		}else{
+			repairs.setIdRepairs(ServicemanController.getRepairs().getIdRepairs());
+			repairs.setComments(commentsText.getText());
+			repairs.setStatus(statusCombo.getValue());
+			repairs.setDedicatedTime(Double.parseDouble(dedicatedTimeText.getText()));
+			repairs.setStartDate(ServicemanController.getRepairs().getDate());
+			repairs.setIdTypeRepairs(ServicemanController.getRepairs().getIdTypeRepair());
+			repairs.setIdCars(ServicemanController.getRepairs().getIdCar());
+			repairs.setIdClient(ServicemanController.getRepairs().getIdClient());
+			repairs.setPrice(ServicemanController.getRepairs().getPrice());
+			repairsService.save(repairs);
+			alertUpdatedRepair();
+		}
+	}
+
+	private void alertUpdatedRepair() throws IOException {
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Zaaktualizowano dane");
+		alert.setHeaderText("Zaaktualizowano dane zlecenia");
+		alert.getButtonTypes().setAll(ButtonType.OK);
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) {
+			Stage stage = (Stage) backBtn.getScene().getWindow();
+			stage.close();
+			servicemanController.loadRepairsDetails();
+		}
+	}
+
+	private void errorIntroducedDedicatedTime() {
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Błąd");
+		alert.setHeaderText("Wprowadzono czas w niewłaściwy sposób");
+		alert.getButtonTypes().setAll(ButtonType.OK);
+		alert.showAndWait();
+	}
+
+	private boolean textIsDouble(String text) {
+		return text.matches("[0-9]+(\\.){0,1}[0-9]*");
 	}
 
 	@FXML

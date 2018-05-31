@@ -24,7 +24,7 @@
       <Label fx:id="carLabel" layoutX="104.0" layoutY="64.0" text="Samochod" />
       <Label fx:id="clientLabel" layoutX="466.0" layoutY="56.0" text="klient" />
       <Label layoutX="301.0" layoutY="625.0" text="Cena:" />
-      <TextArea fx:id="commentsLabel" layoutX="26.0" layoutY="168.0" prefHeight="155.0" prefWidth="651.0" wrapText="true" />
+      <TextArea fx:id="commentsText" layoutX="26.0" layoutY="168.0" prefHeight="155.0" prefWidth="651.0" wrapText="true" />
       <Button layoutX="214.0" layoutY="659.0" mnemonicParsing="false" onAction="#orderPartAction" text="Zamów część" />
       <TextField fx:id="dedicatedTimeText" layoutX="303.0" layoutY="98.0" />
       <Label layoutX="194.0" layoutY="102.0" text="Czas robocizny:" />
