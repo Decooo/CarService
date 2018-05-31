@@ -18,6 +18,24 @@ public class IssuedPartsWrapper {
 	private String status;
 	private int idRepair;
 	private int idPart;
+	private double price;
+	private double value;
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public double getValue() {
+		return value;
+	}
+
+	public void setValue(double value) {
+		this.value = value;
+	}
 
 	public int getIdRepair() {
 		return idRepair;
@@ -45,6 +63,8 @@ public class IssuedPartsWrapper {
 			part.setStatus(issuedParts.get(i).getStatus());
 			part.setIdRepair(issuedParts.get(i).getIdRepairs());
 			part.setIdPart(issuedParts.get(i).getIdParts());
+			part.setPrice(parts.get(i).getPrice());
+			part.setValue(issuedParts.get(i).getQuantity() * parts.get(i).getPrice());
 			partsWrappers.add(part);
 		}
 		return partsWrappers;

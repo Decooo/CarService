@@ -13,4 +13,5 @@ import java.util.List;
 public interface IssuedPartsRepository extends JpaRepository<IssuedParts,Integer>{
 
 	List<IssuedParts> findByStatusIsNot(String status);
+	List<IssuedParts> findAllByIdRepairs(int idRepairs);
 }

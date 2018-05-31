@@ -29,14 +29,14 @@
       <Label layoutX="194.0" layoutY="102.0" text="Czas robocizny:" />
       <ComboBox fx:id="statusCombo" layoutX="316.0" layoutY="581.0" prefWidth="150.0" />
       <Label layoutX="258.0" layoutY="585.0" text="Status:" />
-      <TableView layoutX="29.0" layoutY="335.0" prefHeight="222.0" prefWidth="651.0">
+      <TableView fx:id="partsTable" layoutX="29.0" layoutY="335.0" prefHeight="222.0" prefWidth="651.0">
         <columns>
-          <TableColumn prefWidth="45.0" text="L.p" />
-          <TableColumn prefWidth="227.0" text="Nazwa" />
-            <TableColumn prefWidth="51.0" text="Ilość" />
-            <TableColumn prefWidth="119.0" text="Cena" />
-            <TableColumn prefWidth="117.0" text="Wartość całkowita" />
-            <TableColumn prefWidth="91.0" text="Status" />
+          <TableColumn fx:id="idColumn" prefWidth="45.0" text="L.p" />
+          <TableColumn fx:id="nameColumn" prefWidth="227.0" text="Nazwa" />
+            <TableColumn fx:id="quantityColumn" prefWidth="51.0" text="Ilość" />
+            <TableColumn fx:id="priceColumn" prefWidth="119.0" text="Cena" />
+            <TableColumn fx:id="valueColumn" prefWidth="117.0" text="Wartość całkowita" />
+            <TableColumn fx:id="statusColumn" prefWidth="91.0" text="Status" />
         </columns>
       </TableView>
       <Label fx:id="priceLabel" layoutX="338.0" layoutY="625.0" text="calkowita cena" />

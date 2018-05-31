@@ -26,4 +26,8 @@ public class IssuedPartsService {
 	public List<IssuedParts> findByStatusIsNot(String status){
 		return issuedPartsRepository.findByStatusIsNot(status);
 	}
+
+	public List<IssuedParts> findAllByIdRepairs(int idRepairs){
+		return issuedPartsRepository.findAllByIdRepairs(idRepairs);
+	}
 }

@@ -2,17 +2,24 @@ package com.serwis.controller.repairs;
 
 import com.serwis.config.StageManager;
 import com.serwis.controller.ServicemanController;
+import com.serwis.entity.IssuedParts;
+import com.serwis.entity.Parts;
 import com.serwis.entity.Repairs;
+import com.serwis.services.IssuedPartsService;
+import com.serwis.services.PartsService;
 import com.serwis.services.RepairsService;
 import com.serwis.util.status.RepairStatus;
 import com.serwis.view.FxmlView;
+import com.serwis.wrappers.IssuedPartsWrapper;
 import com.serwis.wrappers.RepairsWrapper;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -20,6 +27,8 @@ import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -28,6 +37,20 @@ import java.util.ResourceBundle;
  */
 @Controller
 public class DetailsRepairController implements Initializable {
+	@FXML
+	private TableView<IssuedPartsWrapper> partsTable;
+	@FXML
+	private TableColumn<IssuedPartsWrapper,Integer> idColumn;
+	@FXML
+	private TableColumn<IssuedPartsWrapper,String> nameColumn;
+	@FXML
+	private TableColumn<IssuedPartsWrapper,Integer> quantityColumn;
+	@FXML
+	private TableColumn<IssuedPartsWrapper,Double> priceColumn;
+	@FXML
+	private TableColumn<IssuedPartsWrapper,Double> valueColumn;
+	@FXML
+	private TableColumn<IssuedPartsWrapper,String> statusColumn;
 	@Lazy
 	@Autowired
 	private StageManager stageManager;
@@ -35,6 +58,10 @@ public class DetailsRepairController implements Initializable {
 	private RepairsService repairsService;
 	@Autowired
 	private ServicemanController servicemanController;
+	@Autowired
+	private IssuedPartsService issuedPartsService;
+	@Autowired
+	private PartsService partsService;
 	@FXML
 	private Label priceLabel;
 	@FXML
@@ -51,6 +78,8 @@ public class DetailsRepairController implements Initializable {
 	private Button backBtn;
 	private ObservableList<String> statusList = FXCollections.observableArrayList();
 	private int idStatus = 0;
+	private List<IssuedParts> issuedPartsList = new ArrayList<>();
+	private List<Parts> partsList = new ArrayList<>();
 
 
 	@Override
@@ -59,6 +88,9 @@ public class DetailsRepairController implements Initializable {
 		setRepairsProperties(repairsWrapper);
 		statusCombo.setItems(doListStatus());
 		statusCombo.getSelectionModel().select(idStatus);
+		ordinalNumber();
+		setColumnProperties();
+		loadIssuedParts();
 
 	}
 
@@ -140,6 +172,31 @@ public class DetailsRepairController implements Initializable {
 		stage.close();
 	}
 
+	private void setColumnProperties() {
+		nameColumn.setCellValueFactory(new PropertyValueFactory<>("namePart"));
+		quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+		priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+		valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
+	}
+
 	public void loadIssuedParts() {
+		issuedPartsList.clear();
+		partsList.clear();
+		issuedPartsList = issuedPartsService.findAllByIdRepairs(ServicemanController.getRepairs().getIdRepairs());
+
+		for (IssuedParts list : issuedPartsList) {
+			Parts part = partsService.findByIdParts(list.getIdParts());
+			partsList.add(part);
+		}
+		IssuedPartsWrapper wrapper = new IssuedPartsWrapper();
+		ObservableList<IssuedPartsWrapper> issuedPartsWrappers = wrapper.issuedPartsWrappers(partsList, issuedPartsList);
+		partsTable.setItems(issuedPartsWrappers);
+		partsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+	}
+
+	private void ordinalNumber() {
+		idColumn.setCellValueFactory(p -> new ReadOnlyObjectWrapper(partsTable.getItems().indexOf(p.getValue()) + 1 + ""));
+		idColumn.setSortable(false);
 	}
 }
