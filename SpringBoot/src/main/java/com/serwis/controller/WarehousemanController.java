@@ -44,17 +44,17 @@ public class WarehousemanController implements Initializable {
 	@FXML
 	private TableView<IssuedPartsWrapper> orderedTable;
 	@FXML
-	private TableColumn<IssuedPartsWrapper,Integer> idColumn;
+	private TableColumn<IssuedPartsWrapper, Integer> idColumn;
 	@FXML
-	private TableColumn<IssuedPartsWrapper,String> nameColumn;
+	private TableColumn<IssuedPartsWrapper, String> nameColumn;
 	@FXML
-	private TableColumn<IssuedPartsWrapper,Integer> quantityColumn;
+	private TableColumn<IssuedPartsWrapper, Integer> quantityColumn;
 	@FXML
-	private TableColumn<IssuedPartsWrapper,String> statusColumn;
+	private TableColumn<IssuedPartsWrapper, String> statusColumn;
 	@FXML
-	private TableColumn<IssuedPartsWrapper,Boolean> inOrderColumn;
+	private TableColumn<IssuedPartsWrapper, Boolean> inOrderColumn;
 	@FXML
-	private TableColumn<IssuedPartsWrapper,Boolean> issueColumn;
+	private TableColumn<IssuedPartsWrapper, Boolean> issueColumn;
 	private List<IssuedParts> issuedPartsList = new ArrayList<>();
 	private List<Parts> partsList = new ArrayList<>();
 
@@ -64,17 +64,6 @@ public class WarehousemanController implements Initializable {
 
 	@FXML
 	private Button logoutButton;
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		if (UserOnline.getIdRole() == 1) {
-			logoutButton.setText("Powrót");
-		}
-		ordinalNumber();
-		setColumnProperties();
-		loadIssuedPartsDetails();
-	}
-
 	private Callback<TableColumn<IssuedPartsWrapper, Boolean>, TableCell<IssuedPartsWrapper, Boolean>> cellInOrderedFactory =
 			new Callback<TableColumn<IssuedPartsWrapper, Boolean>, TableCell<IssuedPartsWrapper, Boolean>>() {
 				@Override
@@ -134,13 +123,102 @@ public class WarehousemanController implements Initializable {
 					return cell;
 				}
 			};
+	private Callback<TableColumn<IssuedPartsWrapper, Boolean>, TableCell<IssuedPartsWrapper, Boolean>> cellIssue =
+			new Callback<TableColumn<IssuedPartsWrapper, Boolean>, TableCell<IssuedPartsWrapper, Boolean>>() {
+				@Override
+				public TableCell<IssuedPartsWrapper, Boolean> call(final TableColumn<IssuedPartsWrapper, Boolean> param) {
+					final TableCell<IssuedPartsWrapper, Boolean> cell = new TableCell<IssuedPartsWrapper, Boolean>() {
+						final Button btnIssued = new Button();
+						Image imgEdit = new Image(getClass().getResourceAsStream("/images/issued.png"));
+
+						@Override
+						public void updateItem(Boolean check, boolean empty) {
+							super.updateItem(check, empty);
+							if (empty) {
+								setGraphic(null);
+								setText(null);
+							} else {
+								btnIssued.setOnAction(e -> {
+									IssuedPartsWrapper issuedPart = getTableView().getItems().get(getIndex());
+									try {
+										issued(issuedPart);
+									} catch (IOException e1) {
+										e1.printStackTrace();
+									}
+								});
+
+								btnIssued.setStyle("-fx-background-color: transparent;");
+								ImageView iv = EditAndHistoryButton.getImageView(imgEdit);
+								btnIssued.setGraphic(iv);
+
+								setGraphic(btnIssued);
+								setAlignment(Pos.CENTER);
+								setText(null);
+							}
+						}
+
+						private void issued(IssuedPartsWrapper issuedPart) throws IOException {
+							Parts partInMagazine = partsService.findByIdParts(issuedPart.getIdPart());
+							if (partInMagazine.getQuantity() < issuedPart.getQuantity()) {
+								alertlackOfParts();
+							} else {
+								IssuedParts part = new IssuedParts();
+								part.setIdIssuedParts(issuedPart.getIdIssued());
+								part.setIdParts(issuedPart.getIdPart());
+								part.setQuantity(issuedPart.getQuantity());
+								part.setIdRepairs(issuedPart.getIdRepair());
+								part.setStatus(IssuedPartsStatus.ZAKONCZONE.getStatus());
+								alertIssuedPart(part);
+							}
+						}
+
+						private void alertlackOfParts() {
+							Alert alert = new Alert(Alert.AlertType.INFORMATION);
+							alert.setTitle("Brak części");
+							alert.setHeaderText("Brak części na magazynie");
+							alert.getButtonTypes().setAll(ButtonType.OK);
+							Optional<ButtonType> result = alert.showAndWait();
+							if (result.get() == ButtonType.OK) {
+							}
+						}
+
+						private void alertIssuedPart(IssuedParts part) {
+							Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+							alert.setTitle("Potwierdzenie wydawania");
+							alert.setHeaderText(null);
+							alert.setContentText("Czy napewno część zostala wydana?");
+							Optional<ButtonType> result = alert.showAndWait();
+
+							if (result.get() == ButtonType.OK) {
+								issuedPartsService.save(part);
+								Parts partInMagazine = partsService.findByIdParts(part.getIdParts());
+								partInMagazine.setQuantity(partInMagazine.getQuantity()- part.getQuantity());
+								partsService.save(partInMagazine);
+								loadIssuedPartsDetails();
+							}
+						}
+
+					};
+					return cell;
+				}
+			};
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		if (UserOnline.getIdRole() == 1) {
+			logoutButton.setText("Powrót");
+		}
+		ordinalNumber();
+		setColumnProperties();
+		loadIssuedPartsDetails();
+	}
 
 	private void setColumnProperties() {
 		nameColumn.setCellValueFactory(new PropertyValueFactory<>("namePart"));
 		quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 		statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 		inOrderColumn.setCellFactory(cellInOrderedFactory);
-		//issueColumn.setCellFactory(cell);
+		issueColumn.setCellFactory(cellIssue);
 	}
 
 	public void loadIssuedPartsDetails() {

@@ -87,7 +87,7 @@ public class OrderPartsController implements Initializable {
 	private void alertAddNewIssuedPart() {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Zamowiono nowa czesc");
-		alert.setHeaderText("Pomyślnie Zamowiono nowa czesc");
+		alert.setHeaderText("Pomyślnie zamowiono nowa czesc");
 		alert.getButtonTypes().setAll(ButtonType.OK);
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {
