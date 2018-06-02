@@ -10,19 +10,19 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="background" prefHeight="600.0" prefWidth="600.0" stylesheets="@../style/dark-theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.cars.AddCarController">
+<AnchorPane fx:id="background" prefHeight="454.0" prefWidth="424.0" stylesheets="@../style/dark-theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.cars.AddCarController">
    <children>
-      <Label id="text-field" layoutX="192.0" layoutY="118.0" text="Marka:" />
-      <Label id="text-field" layoutX="192.0" layoutY="168.0" text="Model:" />
-      <Label id="text-field" layoutX="170.0" layoutY="218.0" text="Rok produkcji:" />
-      <Label id="text-field" layoutX="200.0" layoutY="268.0" text="VIN:" />
-      <Label id="text-field" layoutX="170.0" layoutY="318.0" text="Nr rejestracyjny:" />
-      <JFXButton id="button" fx:id="backButton" layoutX="152.0" layoutY="394.0" onAction="#backAction" prefHeight="32.0" prefWidth="120.0" text="Powrót" />
-      <JFXButton id="button" layoutX="311.0" layoutY="394.0" onAction="#addCarAction" text="Dodaj samochód" />
-      <JFXTextField id="text-field" fx:id="textFieldBrand" layoutX="275.0" layoutY="100.0" />
-      <JFXTextField id="text-field" fx:id="textFieldModel" layoutX="275.0" layoutY="150.0" />
-      <JFXTextField id="text-field" fx:id="textFieldVIN" layoutX="275.0" layoutY="250.0" />
-      <JFXTextField id="text-field" fx:id="textFieldRegistrationNumber" layoutX="275.0" layoutY="300.0" />
-      <JFXComboBox id="combo-box" fx:id="yearsProductionComboBox" layoutX="309.0" layoutY="200.0" prefHeight="30.0" prefWidth="84.0" />
+      <Label id="text-field" layoutX="113.0" layoutY="68.0" text="Marka:" />
+      <Label id="text-field" layoutX="113.0" layoutY="118.0" text="Model:" />
+      <Label id="text-field" layoutX="91.0" layoutY="168.0" text="Rok produkcji:" />
+      <Label id="text-field" layoutX="121.0" layoutY="218.0" text="VIN:" />
+      <Label id="text-field" layoutX="91.0" layoutY="268.0" text="Nr rejestracyjny:" />
+      <JFXButton id="button" fx:id="backButton" layoutX="73.0" layoutY="344.0" onAction="#backAction" prefHeight="32.0" prefWidth="120.0" text="Powrót" />
+      <JFXButton id="button" layoutX="232.0" layoutY="344.0" onAction="#addCarAction" text="Dodaj samochód" />
+      <JFXTextField id="text-field" fx:id="textFieldBrand" layoutX="196.0" layoutY="50.0" />
+      <JFXTextField id="text-field" fx:id="textFieldModel" layoutX="196.0" layoutY="100.0" />
+      <JFXTextField id="text-field" fx:id="textFieldVIN" layoutX="196.0" layoutY="200.0" />
+      <JFXTextField id="text-field" fx:id="textFieldRegistrationNumber" layoutX="196.0" layoutY="250.0" />
+      <JFXComboBox id="combo-box" fx:id="yearsProductionComboBox" layoutX="230.0" layoutY="150.0" prefHeight="30.0" prefWidth="84.0" />
    </children>
 </AnchorPane>
