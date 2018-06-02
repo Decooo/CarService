@@ -90,7 +90,7 @@ public class DetailHistoryRepairsController implements Initializable {
 		valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
 	}
 
-	public void loadIssuedParts() {
+	private void loadIssuedParts() {
 		issuedPartsList.clear();
 		partsList.clear();
 		issuedPartsList = issuedPartsService.findAllByIdRepairs(HistoryRepairsController.getRepairs().getIdRepairs());

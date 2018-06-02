@@ -31,4 +31,7 @@ public class ServiceContractsService {
 	public void deleteInBatch(List<ServiceContracts> contracts) {
 			serviceContractsRepository.deleteInBatch(contracts);
 	}
+	public ServiceContracts findByIdClient(int id){
+		return  serviceContractsRepository.findByIdClient(id);
+	}
 }
