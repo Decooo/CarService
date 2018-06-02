@@ -10,20 +10,20 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="background" prefHeight="600.0" prefWidth="600.0" stylesheets="@../style/dark-theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.cars.UpdateCarController">
+<AnchorPane fx:id="background" prefHeight="454.0" prefWidth="424.0" stylesheets="@../style/dark-theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.cars.UpdateCarController">
    <children>
-      <Label id="text-field" layoutX="192.0" layoutY="118.0" text="Marka:" />
-      <Label id="text-field" layoutX="192.0" layoutY="168.0" text="Model:" />
-      <Label id="text-field" layoutX="170.0" layoutY="218.0" text="Rok produkcji:" />
-      <Label id="text-field" layoutX="200.0" layoutY="268.0" text="VIN:" />
-      <Label id="text-field" layoutX="170.0" layoutY="318.0" text="Nr rejestracyjny:" />
-      <JFXButton id="button" fx:id="backButton" layoutX="152.0" layoutY="394.0" onAction="#backAction" prefHeight="32.0" prefWidth="120.0" text="Powrót" />
-      <JFXButton id="button" layoutX="282.0" layoutY="394.0" onAction="#updateCarAction" text="Aktualizuj samochód" />
-      <JFXTextField id="text-field" fx:id="textFieldBrand" layoutX="275.0" layoutY="100.0" />
-      <JFXTextField id="text-field" fx:id="textFieldModel" layoutX="275.0" layoutY="150.0" />
-      <JFXTextField id="text-field" fx:id="textFieldVIN" layoutX="275.0" layoutY="250.0" />
-      <JFXTextField id="text-field" fx:id="textFieldRegistrationNumber" layoutX="275.0" layoutY="300.0" />
-      <JFXComboBox id="combo-box" fx:id="yearsProductionComboBox" layoutX="309.0" layoutY="200.0" prefHeight="30.0" prefWidth="84.0" />
+      <Label id="text-field" layoutX="116.0" layoutY="63.0" text="Marka:" />
+      <Label id="text-field" layoutX="116.0" layoutY="113.0" text="Model:" />
+      <Label id="text-field" layoutX="94.0" layoutY="163.0" text="Rok produkcji:" />
+      <Label id="text-field" layoutX="124.0" layoutY="213.0" text="VIN:" />
+      <Label id="text-field" layoutX="94.0" layoutY="263.0" text="Nr rejestracyjny:" />
+      <JFXButton id="button" fx:id="backButton" layoutX="76.0" layoutY="339.0" onAction="#backAction" prefHeight="32.0" prefWidth="120.0" text="Powrót" />
+      <JFXButton id="button" layoutX="206.0" layoutY="339.0" onAction="#updateCarAction" text="Aktualizuj samochód" />
+      <JFXTextField id="text-field" fx:id="textFieldBrand" layoutX="199.0" layoutY="45.0" />
+      <JFXTextField id="text-field" fx:id="textFieldModel" layoutX="199.0" layoutY="95.0" />
+      <JFXTextField id="text-field" fx:id="textFieldVIN" layoutX="199.0" layoutY="195.0" />
+      <JFXTextField id="text-field" fx:id="textFieldRegistrationNumber" layoutX="199.0" layoutY="245.0" />
+      <JFXComboBox id="combo-box" fx:id="yearsProductionComboBox" layoutX="233.0" layoutY="145.0" prefHeight="30.0" prefWidth="84.0" />
 
    </children>
 </AnchorPane>

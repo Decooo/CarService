@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.serviceContracts.AddServiceContractController">
+<AnchorPane id="background" prefHeight="381.0" prefWidth="310.0" stylesheets="@../style/dark-theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.serviceContracts.AddServiceContractController">
    <children>
-      <Button fx:id="backButton" layoutX="482.0" layoutY="526.0" mnemonicParsing="false" onAction="#backAction" text="Powrót" />
-      <TextField fx:id="textWorkingTime" layoutX="205.0" layoutY="108.0" promptText="czas pracy" />
-      <TextField fx:id="textAmountForParts" layoutX="205.0" layoutY="193.0" promptText="kwota na części" />
-      <Button layoutX="234.0" layoutY="400.0" mnemonicParsing="false" onAction="#addContractAction" text="Dodaj umowe" />
-      <ComboBox fx:id="clientComboBox" layoutX="204.0" layoutY="275.0" prefWidth="150.0" />
+      <JFXButton id="button" fx:id="backButton" layoutX="60.0" layoutY="284.0" mnemonicParsing="false" onAction="#backAction" text="Powrót" />
+      <JFXTextField id="text-field3" fx:id="textWorkingTime" layoutX="72.0" layoutY="64.0" promptText="czas pracy" />
+      <JFXTextField id="text-field3" fx:id="textAmountForParts" layoutX="72.0" layoutY="149.0" promptText="kwota na części" />
+      <JFXButton id="button" layoutX="147.0" layoutY="284.0" mnemonicParsing="false" onAction="#addContractAction" text="Dodaj umowe" />
+      <JFXComboBox fx:id="clientComboBox" layoutX="71.0" layoutY="231.0" prefWidth="150.0" />
+      <Label id="text-field" layoutX="72.0" layoutY="44.0" stylesheets="@../style/dark-theme.css" text="Czas pracy: " />
+      <Label id="text-field" layoutX="72.0" layoutY="129.0" stylesheets="@../style/dark-theme.css" text="Kwota na części::" />
+      <Label id="text-field" layoutX="72.0" layoutY="221.0" stylesheets="@../style/dark-theme.css" text="??? ????: " />
    </children>
 </AnchorPane>
