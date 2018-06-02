@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ServiceContractsRepository extends JpaRepository<ServiceContracts, Integer> {
 	ServiceContracts findByIdServiceContracts(int id);
+	ServiceContracts findByIdClient(int id);
 }
