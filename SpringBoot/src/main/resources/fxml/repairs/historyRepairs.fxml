@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.serwis.controller.repairs.HistoryRepairsController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.repairs.HistoryRepairsController">
 
+    <TableView fx:id="repairsTable" prefHeight="474.0" prefWidth="806.0">
+        <columns>
+            <TableColumn fx:id="idColumn" prefWidth="62.0" text="L.p" />
+            <TableColumn fx:id="carColumn" prefWidth="203.0" text="Samochód" />
+            <TableColumn fx:id="clientColumn" prefWidth="179.0" text="Klient" />
+            <TableColumn fx:id="typeRepairsColumn" prefWidth="102.0" text="Typ naprawy" />
+            <TableColumn fx:id="dateColumn" prefWidth="127.0" text="Data rozpoczecia" />
+            <TableColumn fx:id="statusColumn" prefWidth="75.0" text="Status" />
+            <TableColumn fx:id="detailsColumn" prefWidth="57.0" text="Podglad" />
+        </columns>
+    </TableView>
 </AnchorPane>

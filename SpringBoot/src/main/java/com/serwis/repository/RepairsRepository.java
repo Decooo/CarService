@@ -14,4 +14,5 @@ public interface RepairsRepository extends JpaRepository<Repairs, Integer>{
 	List<Repairs> findByIdCars(int idCars);
 	List<Repairs> findByIdClient(int idClient);
 	List<Repairs> findByStatusIsNot(String status);
+	List<Repairs> findByStatusIs(String status);
 }

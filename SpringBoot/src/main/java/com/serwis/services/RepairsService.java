@@ -34,4 +34,7 @@ public class RepairsService {
 		return repairsRepository.findByStatusIsNot(status);
 	}
 
+	public List<Repairs> findByStatusIs(String status) {
+		return repairsRepository.findByStatusIs(status);
+	}
 }
