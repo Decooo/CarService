@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="background" prefHeight="350.0" prefWidth="308.0" stylesheets="@../style/dark-theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.repairs.OrderPartsController">
+   <children>
+      <Label id="text-field" layoutX="116.0" layoutY="44.0" text="Zamów część" />
+      <JFXButton id="button" fx:id="backBtn" layoutX="78.0" layoutY="259.0" mnemonicParsing="false" onAction="#backAction" text="Powrót" />
+      <JFXComboBox fx:id="partCombo" layoutX="78.0" layoutY="107.0" prefWidth="150.0" />
+      <JFXTextField id="text-field3" fx:id="quantityText" layoutX="79.0" layoutY="194.0" prefHeight="25.0" prefWidth="149.0" promptText="ilość" />
+      <Label id="text-field" layoutX="137.0" layoutY="90.0" text="Część:" />
+      <Label id="text-field" layoutX="140.0" layoutY="177.0" text="Ilość:" />
+      <JFXButton id="button" layoutX="167.0" layoutY="259.0" mnemonicParsing="false" onAction="#orderAction" text="Zamów" />
+   </children>
+</AnchorPane>

@@ -5,6 +5,7 @@ import com.serwis.config.StageManager;
 import com.serwis.entity.Users;
 import com.serwis.repository.UsersRepository;
 import com.serwis.view.FxmlView;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -12,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -110,6 +112,10 @@ public class LoginController implements Initializable {
 			textfieldPassword.clear();
 		}
 	}
-
+	@FXML
+	public void exit(ActionEvent event) {
+		Stage stage = (Stage) btnLogin.getScene().getWindow();
+		stage.close();
+	}
 }
 

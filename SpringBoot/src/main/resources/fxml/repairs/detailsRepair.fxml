@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="background" prefHeight="760.0" prefWidth="702.0" stylesheets="@../style/dark-theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.repairs.DetailsRepairController">
+   <children>
+      <Label layoutX="320.0" layoutY="14.0" text="Zlecenie" textFill="#c9c9c9">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <JFXButton id="button" fx:id="backBtn" layoutX="603.0" layoutY="675.0" mnemonicParsing="false" onAction="#backAction" text="Powrót" />
+      <JFXButton id="button" layoutX="56.0" layoutY="675.0" mnemonicParsing="false" onAction="#updateAction" text="Aktualizuj dane" />
+      <JFXButton id="button" layoutX="404.0" layoutY="675.0" mnemonicParsing="false" onAction="#endRepairAction" text="Zakończ zlecenie" />
+      <Label id="text-field" fx:id="carLabel" layoutX="104.0" layoutY="64.0" text="Samochod" />
+      <Label id="text-field" fx:id="clientLabel" layoutX="466.0" layoutY="56.0" text="klient" />
+      <Label id="text-field" layoutX="299.0" layoutY="636.0" text="Cena:" />
+      <TextArea id="button" fx:id="commentsText" layoutX="26.0" layoutY="168.0" prefHeight="155.0" prefWidth="651.0" wrapText="true" />
+      <JFXButton id="button" layoutX="215.0" layoutY="675.0" mnemonicParsing="false" onAction="#orderPartAction" text="Zamów część" />
+      <JFXTextField id="text-field3" fx:id="dedicatedTimeText" layoutX="303.0" layoutY="98.0" prefHeight="30.0" prefWidth="74.0" />
+      <Label id="text-field" layoutX="194.0" layoutY="102.0" text="Czas robocizny:" />
+      <JFXComboBox fx:id="statusCombo" layoutX="316.0" layoutY="581.0" prefWidth="150.0" />
+      <Label id="text-field" layoutX="258.0" layoutY="585.0" text="Status:" />
+      <TableView fx:id="partsTable" layoutX="29.0" layoutY="335.0" prefHeight="222.0" prefWidth="651.0">
+        <columns>
+          <TableColumn fx:id="idColumn" prefWidth="45.0" text="L.p" />
+          <TableColumn fx:id="nameColumn" prefWidth="227.0" text="Nazwa" />
+            <TableColumn fx:id="quantityColumn" prefWidth="51.0" text="Ilość" />
+            <TableColumn fx:id="priceColumn" prefWidth="119.0" text="Cena" />
+            <TableColumn fx:id="valueColumn" prefWidth="117.0" text="Wartość całkowita" />
+            <TableColumn fx:id="statusColumn" prefWidth="91.0" text="Status" />
+        </columns>
+      </TableView>
+      <Label id="text-field" fx:id="priceLabel" layoutX="336.0" layoutY="636.0" text="calkowita cena" />
+      <Label id="text-field" layoutX="320.0" layoutY="145.0" text="Uwagi:" />
+   </children>
+</AnchorPane>

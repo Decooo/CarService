@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane prefHeight="520.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.parts.ListPartsController">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.*?>
+
+<AnchorPane id="background" prefHeight="520.0" prefWidth="775.0" stylesheets="@../style/dark-theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.parts.ListPartsController">
    <children>
-      <TextField fx:id="searchField" layoutX="174.0" layoutY="14.0" promptText="wyszukaj" />
-      <Button fx:id="backButton" layoutX="538.0" layoutY="14.0" mnemonicParsing="false" onAction="#backAction" text="Powrot" />
-      <TableView fx:id="partsTable" layoutY="47.0" prefHeight="475.0" prefWidth="775.0">
+      <JFXTextField id="text-field3" fx:id="searchField" layoutX="145.0" layoutY="15.0" promptText="wyszukaj" />
+      <JFXButton id="button" fx:id="backButton" layoutX="538.0" layoutY="14.0" mnemonicParsing="false" onAction="#backAction" text="Powrot" />
+      <TableView fx:id="partsTable" layoutY="47.0" prefHeight="475.0" prefWidth="775.0" stylesheets="@../style/dark-theme.css">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="75.0" text="L.p" />
           <TableColumn fx:id="nameColumn" prefWidth="172.0" text="Nazwa" />

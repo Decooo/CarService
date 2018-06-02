@@ -7,20 +7,15 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="562.0" prefWidth="1141.0" stylesheets="@../style/dark-theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.cars.ClientHistoryController">
-   <children>
-      <TableView layoutX="-1.0" prefHeight="575.0" prefWidth="1141.0" stylesheets="@../style/dark-theme.css">
-        <columns>
-          <TableColumn prefWidth="38.000030517578125" text="L.p" />
-            <TableColumn prefWidth="109.0" text="Marka" />
-            <TableColumn prefWidth="116.0" text="Model" />
-            <TableColumn prefWidth="161.0" text="VIN" />
-            <TableColumn prefWidth="93.0" text="Data" />
-          <TableColumn prefWidth="113.0" text="Typ naprawy" />
-            <TableColumn prefWidth="151.0" text="Poświęcony czas" />
-            <TableColumn prefWidth="253.0" text="Uwagi" />
-            <TableColumn prefWidth="105.0" text="Cena" />
-        </columns>
-      </TableView>
-   </children>
+<AnchorPane prefHeight="575.0" prefWidth="685.0" stylesheets="@../style/dark-theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.cars.ClientHistoryController">
+    <children>
+        <TableView fx:id="carsTable" layoutX="-1.0" prefHeight="575.0" prefWidth="685.0" stylesheets="@../style/dark-theme.css">
+            <columns>
+                <TableColumn fx:id="idColumn" prefWidth="57.0" text="L.p" />
+                <TableColumn fx:id="dateColumn" prefWidth="202.0" text="Data" />
+                <TableColumn fx:id="typeColumn" prefWidth="231.0" text="Typ naprawy" />
+                <TableColumn fx:id="priceColumn" prefWidth="194.0" text="Cena" />
+            </columns>
+        </TableView>
+    </children>
 </AnchorPane>

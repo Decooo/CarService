@@ -28,4 +28,7 @@ public class CarsService {
 		carsRepository.deleteInBatch(cars);
 	}
 
+	public Cars findByIdCars(int idCars){
+		return carsRepository.findByIdCars(idCars);
+	}
 }

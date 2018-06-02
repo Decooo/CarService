@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import com.jfoenix.controls.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.ServicemanController">
+<AnchorPane id="background" prefHeight="800.0" prefWidth="1100.0" stylesheets="@style/dark-theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.ServicemanController">
    <children>
-      <TableView layoutX="294.0" prefHeight="800.0" prefWidth="806.0">
+      <TableView fx:id="repairsTable" layoutX="294.0" prefHeight="800.0" prefWidth="806.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="idColumn" prefWidth="62.0" text="L.p" />
+          <TableColumn fx:id="carColumn" prefWidth="203.0" text="Samochód" />
+            <TableColumn fx:id="clientColumn" prefWidth="179.0" text="Klient" />
+            <TableColumn fx:id="typeRepairsColumn" prefWidth="102.0" text="Typ naprawy" />
+            <TableColumn fx:id="dateColumn" prefWidth="127.0" text="Data rozpoczecia" />
+            <TableColumn fx:id="statusColumn" prefWidth="75.0" text="Status" />
+            <TableColumn fx:id="detailsColumn" prefWidth="57.0" text="Podglad" />
         </columns>
       </TableView>
-      <Button layoutX="98.0" layoutY="64.0" mnemonicParsing="false" text="Nowe zlecenie" />
-      <Button layoutX="98.0" layoutY="132.0" mnemonicParsing="false" text="Historia zleceń" />
-      <Button fx:id="logoutButton" layoutX="119.0" layoutY="727.0" mnemonicParsing="false" onAction="#logoutAction" text="Wyloguj" />
-      <Button layoutX="108.0" layoutY="199.0" mnemonicParsing="false" onAction="#openCarsListAction" text="Samochody" />
-      <Button layoutX="124.0" layoutY="258.0" mnemonicParsing="false" onAction="#openCardsClientsAction" text="Klienci" />
+      <JFXButton id="button" layoutX="88.0" layoutY="50.0" mnemonicParsing="false" onAction="#newRepair" prefHeight="32.0" prefWidth="130.0" text="Nowe zlecenie" />
+      <JFXButton id="button" layoutX="88.0" layoutY="100.0" mnemonicParsing="false" onAction="#historyAction" prefHeight="32.0" prefWidth="130.0" text="Historia zleceń" />
+      <JFXButton id="button" fx:id="logoutButton" layoutX="88.0" layoutY="300.0" mnemonicParsing="false" onAction="#logoutAction" prefHeight="32.0" prefWidth="130.0" text="Wyloguj" />
+      <JFXButton id="button" layoutX="89.0" layoutY="150.0" mnemonicParsing="false" onAction="#openCarsListAction" prefHeight="32.0" prefWidth="130.0" text="Samochody" />
+      <JFXButton id="button" layoutX="89.0" layoutY="200.0" mnemonicParsing="false" onAction="#openCardsClientsAction" prefHeight="32.0" prefWidth="130.0" text="Klienci" />
    </children>
 </AnchorPane>

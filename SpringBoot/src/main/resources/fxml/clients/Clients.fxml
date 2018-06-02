@@ -34,6 +34,6 @@
       <Label id="text-field" layoutX="35.0" layoutY="49.0" stylesheets="@../style/dark-theme.css" text="Wyszukaj:" />
       <JFXButton id="button" layoutX="35.0" layoutY="153.0" onAction="#newClientAction" stylesheets="@../style/dark-theme.css" text="Dodaj klienta" />
       <JFXButton id="button" fx:id="backButton" layoutX="35.0" layoutY="676.0" onAction="#backAction" stylesheets="@../style/dark-theme.css" text="Powrót" />
-      <JFXTextField id="text-field" fx:id="searchTextField" layoutX="35.0" layoutY="76.0" stylesheets="@../style/dark-theme.css" />
+      <JFXTextField id="text-field" fx:id="searchTextField" layoutX="35.0" layoutY="76.0" promptText="słowo kluczowe" stylesheets="@../style/dark-theme.css" />
    </children>
 </AnchorPane>
