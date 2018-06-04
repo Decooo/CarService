@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.orders.HistoryOrdersController">
+<AnchorPane fx:id="background" prefHeight="328.0" prefWidth="602.0" stylesheets="@../style/dark-theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serwis.controller.orders.HistoryOrdersController">
    <children>
-      <Button fx:id="backBtn" layoutX="448.0" layoutY="14.0" mnemonicParsing="false" onAction="#backAction" text="Powrót" />
-      <TableView fx:id="historyOrdersTable" layoutY="60.0" prefHeight="342.0" prefWidth="602.0">
+      <JFXButton id="button" fx:id="backBtn" layoutX="448.0" layoutY="11.0" mnemonicParsing="false" onAction="#backAction" text="Powrót" />
+      <TableView fx:id="historyOrdersTable" layoutY="48.0" prefHeight="342.0" prefWidth="602.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="75.0" text="L.p" />
           <TableColumn fx:id="dateColumn" prefWidth="147.0" text="Data" />
@@ -19,6 +23,11 @@
             <TableColumn fx:id="detailColumn" minWidth="0.0" prefWidth="91.0" text="Szczegóły" />
         </columns>
       </TableView>
-      <TextField fx:id="searchField" layoutX="29.0" layoutY="14.0" promptText="wyszukaj" />
+      <JFXTextField id="text-field3" fx:id="searchField" layoutX="38.0" layoutY="8.0" promptText="Wyszukaj" />
+       <ImageView fitHeight="20.0" fitWidth="23.0" layoutX="8.0" layoutY="17.0" opacity="0.8">
+       <image>
+           <Image url="@../../images/detail.png" />
+       </image>
+       </ImageView>
    </children>
 </AnchorPane>

@@ -66,7 +66,7 @@
     -fx-font-size : 10pt;
     -jfx-focus-color: -fx-blue;
     -jfx-unfocus-color: -fx-gray2;
-    -fx-text-fill: derive(-fx-gray, 60%);
+    -fx-text-fill: derive(-fx-gray, 100%);
 }
 #combo-box{
     -fx-text-fill: -fx-gray;
