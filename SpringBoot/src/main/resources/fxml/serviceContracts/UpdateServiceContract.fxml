@@ -18,6 +18,6 @@
       <JFXComboBox fx:id="clientComboBox" layoutX="71.0" layoutY="231.0" prefWidth="150.0" />
       <Label id="text-field" layoutX="72.0" layoutY="44.0" stylesheets="@../style/dark-theme.css" text="Czas pracy: " />
       <Label id="text-field" layoutX="72.0" layoutY="129.0" stylesheets="@../style/dark-theme.css" text="Kwota na części::" />
-      <Label id="text-field" layoutX="72.0" layoutY="221.0" stylesheets="@../style/dark-theme.css" text="??? ????: " />
+      <Label id="text-field" layoutX="72.0" layoutY="221.0" stylesheets="@../style/dark-theme.css" text="Klient: " />
    </children>
 </AnchorPane>

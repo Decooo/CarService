@@ -26,6 +26,6 @@
       <JFXComboBox id="combo-box" fx:id="chooseRole" layoutX="243.0" layoutY="221.0" prefHeight="25.0" prefWidth="149.0" />
       <JFXTextField id="text-field" fx:id="textFieldUsername" layoutX="243.0" layoutY="104.0" prefHeight="25.0" prefWidth="149.0" promptText="username" />
       <JFXTextField id="text-field" fx:id="textFieldPassword" layoutX="243.0" layoutY="161.0" prefHeight="25.0" prefWidth="149.0" promptText="password" />
-      <JFXButton id="button" layoutX="180.0" layoutY="298.0" onAction="#addNewAccountAction" prefHeight="32.0" prefWidth="100.0" stylesheets="@../style/dark-theme.css" text="Powrót" />
+      <JFXButton id="button" fx:id="backBtn" layoutX="180.0" layoutY="298.0" onAction="#backAction" prefHeight="32.0" prefWidth="100.0" stylesheets="@../style/dark-theme.css" text="Powrót" />
    </children>
 </AnchorPane>

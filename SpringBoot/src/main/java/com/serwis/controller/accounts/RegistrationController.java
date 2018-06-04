@@ -10,10 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +30,8 @@ public class RegistrationController implements Initializable {
 	private UsersService usersService;
 	@Autowired
 	private UserRoleService userRoleService;
-
+@FXML
+private Button backBtn;
 	@FXML
 	private ComboBox<String> chooseRole;
 	@FXML
@@ -128,4 +126,8 @@ public class RegistrationController implements Initializable {
 		}
 	}
 
+	public void backAction(ActionEvent event) {
+		Stage stage = (Stage) backBtn.getScene().getWindow();
+		stage.close();
+	}
 }
